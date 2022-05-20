@@ -51,26 +51,40 @@
 }
 
 .movieVote {
-  overflow: hidden;
-}
-
-.movieVote > :first-child {
-  float: left;
-}
-
-.movieVote > * {
-  display: inline;
+  align-items: flex-end;
+  display: flex;
+  justify-content: space-between;
 }
 
 .movieShare {
+  align-items: center;
+  display: flex;
   font-size: 16px;
   font-weight: 600;
   text-transform: uppercase;
 }
 
+.movieShareIcon {
+  margin-right: 8px;
+}
+
 .movieVoteCount {
   font-size: 12px;
   font-weight: 500;
+  margin-bottom: 24px;
+}
+
+.movieRateText {
+  color: rgba(0, 0, 0, 0.25);
+  font-weight: 400;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.movieRateStars {
+  display: flex;
+  justify-content: space-between;
+  opacity: 0.7;
 }
 
 .movieDetails {
@@ -103,7 +117,7 @@
 }
 
 .movieDescription {
-  margin-left: 64px;
+  margin: 0 64px 64px 0;
 }
 
 .movieOverview {
@@ -150,6 +164,10 @@
   font-weight: 700;
   font-size: 18px;
   line-height: 155%;
+}
+
+.movieCredits {
+  margin-bottom: 72px;
 }
 
 .movieCreditsHeader {

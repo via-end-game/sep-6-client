@@ -2,26 +2,34 @@ import { NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
 import styles from './test-index.module.css';
+import { ListOfMedia } from '../types/list-of-media.dto';
 
 export const getServerSideProps = async () => {
-  const res = await fetch(
-    `https://api.themoviedb.org/3/trending/movie/week?api_key=${process.env.TMDB_API_KEY}`
-  );
-
-  const data = await res.json();
-
+  const responses = await Promise.all([
+    getTredingMoviesThisWeek(),
+    getTrendingTVThisWeek(),
+    getPopularMovies(),
+  ]);
   return {
     props: {
-      popularMovies: data.results,
+      trendingMovies: responses[0] as ListOfMedia,
+      trendingTvs: responses[1] as ListOfMedia,
+      popularMovies: responses[2] as ListOfMedia,
     },
   };
 };
 
 interface Props {
-  popularMovies: [];
+  trendingMovies: ListOfMedia;
+  trendingTvs: ListOfMedia;
+  popularMovies: ListOfMedia;
 }
 
-const TestHome: NextPage<Props> = ({ popularMovies }) => {
+const TestHome: NextPage<Props> = ({
+  trendingMovies,
+  trendingTvs,
+  popularMovies,
+}) => {
   return (
     <>
       <Head>
@@ -31,30 +39,69 @@ const TestHome: NextPage<Props> = ({ popularMovies }) => {
       </Head>
 
       <main className={styles.container}>
-        {popularMovies.map(
-          ({
-            id,
-            poster_path,
-            title,
-          }: {
-            id: number;
-            poster_path: string;
-            title: string;
-          }) => (
-            <div key={id}>
-              <Image
-                alt={title}
-                height={240}
-                src={`https://image.tmdb.org/t/p/original${poster_path}`}
-                width={240}
-              />
-              <h1>{title}</h1>
-            </div>
-          )
-        )}
+        <h1>Popular Movies</h1>
+        {trendingMovies.results.map((movie) => (
+          <div key={movie.id}>
+            <Image
+              alt={movie.title}
+              height={240}
+              src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+              width={240}
+            />
+            <h1>{movie.title}</h1>
+          </div>
+        ))}
+        <br />
+        <br />
+        <br />
+        <br />
+        <h1>Popular TVs</h1>
+        {trendingTvs.results.map((tv) => (
+          <div key={tv.id}>
+            <Image
+              alt={tv.title}
+              height={240}
+              src={`https://image.tmdb.org/t/p/original${tv.poster_path}`}
+              width={240}
+            />
+            <h1>{tv.title}</h1>
+          </div>
+        ))}
+
+        <br />
+        <br />
+        <br />
+        <br />
+        <h1>Top rated throughout the history</h1>
+        {popularMovies.results.map((popularMovie) => (
+          <div key={popularMovie.id}>
+            <Image
+              alt={popularMovie.title}
+              height={240}
+              src={`https://image.tmdb.org/t/p/original${popularMovie.poster_path}`}
+              width={240}
+            />
+            <h1>{popularMovie.title}</h1>
+          </div>
+        ))}
       </main>
     </>
   );
 };
+
+const getTredingMoviesThisWeek = (): Promise<ListOfMedia> =>
+  fetch(
+    `https://api.themoviedb.org/3/trending/movie/week?api_key=${process.env.TMDB_API_KEY}`
+  ).then((res) => res.json());
+
+const getTrendingTVThisWeek = (): Promise<ListOfMedia> =>
+  fetch(
+    `https://api.themoviedb.org/3/trending/tv/week?api_key=${process.env.TMDB_API_KEY}`
+  ).then((res) => res.json());
+
+const getPopularMovies = (): Promise<ListOfMedia> =>
+  fetch(
+    `https://api.themoviedb.org/3/movie/top_rated?api_key=${process.env.TMDB_API_KEY}`
+  ).then((res) => res.json());
 
 export default TestHome;

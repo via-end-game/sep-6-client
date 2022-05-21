@@ -1,12 +1,13 @@
 import type { NextPage } from 'next';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import CrewProfilePreview from '../../components/CrewProfilePreview';
+import CrewProfilePreviewList from '../../components/CrewProfilePreviewList';
 import styles from '../../styles/Movie.module.css';
 import { Crew, MovieCredits } from '../../types/movie-credits.dto';
 import { MovieReleaseDates } from '../../types/movie-release-dates.dto';
 import { MovieReviews } from '../../types/movie-reviews.dto';
 import { Movie } from '../../types/movie.dto';
+import { getNumberWithSpaces } from '../../utils/numbers';
 import { getMinutesToHoursAndMinutes } from '../../utils/time';
 import { getResourcePath } from '../../utils/tmdbResources';
 import { ListOfMedia } from '../../types/list-of-media.dto';
@@ -103,12 +104,36 @@ const MoviePage: NextPage<Props> = ({
                 </span>
                 /10
               </p>
-              <p className={styles.movieShare}>Share</p>
+              <p className={styles.movieShare}>
+                <span className={styles.movieShareIcon}>
+                  <Image
+                    alt=""
+                    height={13}
+                    src="/assets/icons/share.svg"
+                    width={13}
+                  />
+                </span>
+                Share
+              </p>
             </div>
-            <p className={styles.movieVoteCount}>{movie.vote_count}</p>
+            <p className={styles.movieVoteCount}>
+              {getNumberWithSpaces(movie.vote_count)}
+            </p>
           </div>
           <div className="movie-rate">
-            <p className="movie-rate__text">Rate this</p>
+            <p className={styles.movieRateText}>Rate this</p>
+            <div className={styles.movieRateStars}>
+              {[...Array(10)].map((k) => (
+                <div key={k}>
+                  <Image
+                    alt=""
+                    height={16}
+                    src="/assets/icons/star.svg"
+                    width={16}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
         <div className={styles.movieDetails}>
@@ -154,42 +179,21 @@ const MoviePage: NextPage<Props> = ({
               </button>
             </div>
           </div>
-          <div className="movie-credits">
+          <div className={styles.movieCredits}>
             <h2 className={styles.movieCreditsHeader}>
               Director{movieExecutors.directors.length > 1 && 's'}
             </h2>
-            {movieExecutors.directors.map(({ id, name, profile_path }) => (
-              <CrewProfilePreview
-                key={id}
-                name={name}
-                picturePath={getResourcePath(profile_path || '')}
-              />
-            ))}
+            <CrewProfilePreviewList list={movieExecutors.directors} />
           </div>
-          <div className="movie-credits">
+          <div className={styles.movieCredits}>
             <h2 className={styles.movieCreditsHeader}>
               Writer{movieExecutors.writers.length > 1 && 's'}
             </h2>
-            {movieExecutors.writers.map(({ id, name, profile_path }) => (
-              <CrewProfilePreview
-                key={id}
-                name={name}
-                picturePath={getResourcePath(profile_path || '')}
-              />
-            ))}
+            <CrewProfilePreviewList list={movieExecutors.writers} />
           </div>
-          <div className="movie-credits">
+          <div className={styles.movieCredits}>
             <h2 className={styles.movieCreditsHeader}>Cast</h2>
-            {movieCredits.cast
-              .slice(0, 20)
-              .map(({ character, id, name, profile_path }) => (
-                <CrewProfilePreview
-                  character={character}
-                  key={id}
-                  name={name}
-                  picturePath={getResourcePath(profile_path || '')}
-                />
-              ))}
+            <CrewProfilePreviewList list={movieCredits.cast.slice(0, 20)} />
           </div>
         </div>
       </div>

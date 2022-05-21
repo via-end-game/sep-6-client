@@ -9,6 +9,7 @@ import { MovieReviews } from '../../types/movie-reviews.dto';
 import { Movie } from '../../types/movie.dto';
 import { getMinutesToHoursAndMinutes } from '../../utils/time';
 import { getResourcePath } from '../../utils/tmdbResources';
+import { ListOfMedia } from '../../types/list-of-media.dto';
 
 export const getServerSideProps = async ({
   params: { id },
@@ -20,6 +21,7 @@ export const getServerSideProps = async ({
     getMovieCreditsFetch(id),
     getMovieReleaseDatesFetch(id),
     getMovieReviewsFetch(id),
+    getSimilarMovies(id),
   ]);
 
   return {
@@ -28,6 +30,7 @@ export const getServerSideProps = async ({
       movieCredits: responses[1] as MovieCredits,
       movieReleaseDates: responses[2] as MovieReleaseDates,
       movieReviews: responses[3] as MovieReviews,
+      similarMovies: responses[4] as ListOfMedia,
     },
   };
 };
@@ -37,6 +40,7 @@ interface Props {
   movieCredits: MovieCredits;
   movieReleaseDates: MovieReleaseDates;
   movieReviews: MovieReviews;
+  similarMovies: ListOfMedia;
 }
 
 const MoviePage: NextPage<Props> = ({
@@ -44,6 +48,7 @@ const MoviePage: NextPage<Props> = ({
   movieCredits,
   movieReleaseDates,
   movieReviews,
+  similarMovies,
 }) => {
   const [movieExecutors, setMovieExecutors] = useState<{
     directors: Crew[];
@@ -188,6 +193,21 @@ const MoviePage: NextPage<Props> = ({
           </div>
         </div>
       </div>
+
+      <div>
+        <h1>Similar movies</h1>
+        {similarMovies.results.map((movie) => (
+          <div key={movie.id}>
+            <Image
+              alt={movie.title}
+              height={240}
+              src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+              width={240}
+            />
+            <h1>{movie.title}</h1>
+          </div>
+        ))}
+      </div>
     </main>
   );
 };
@@ -210,6 +230,11 @@ const getMovieCreditsFetch = (id: string): Promise<MovieCredits> =>
 const getMovieReviewsFetch = (id: string): Promise<MovieReviews> =>
   fetch(
     `https://api.themoviedb.org/3/movie/${id}/reviews?api_key=${process.env.TMDB_API_KEY}`
+  ).then((res) => res.json());
+
+const getSimilarMovies = (id: string): Promise<ListOfMedia> =>
+  fetch(
+    `https://api.themoviedb.org/3/movie/${id}/similar?api_key=${process.env.TMDB_API_KEY}`
   ).then((res) => res.json());
 
 export default MoviePage;

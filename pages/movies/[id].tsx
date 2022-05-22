@@ -1,6 +1,6 @@
 import type { NextPage } from 'next';
 import { useEffect, useState } from 'react';
-import MediaContent from '../../components/MediaContent/MediaContent';
+import MediaContent from '../../components/MediaContent';
 import { ListOfMedia } from '../../types/list-of-media.dto';
 import { Crew, MovieCredits } from '../../types/movie-credits.dto';
 import { MovieReleaseDates } from '../../types/movie-release-dates.dto';

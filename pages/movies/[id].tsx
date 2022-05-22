@@ -1,16 +1,11 @@
 import type { NextPage } from 'next';
-import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import CrewProfilePreviewList from '../../components/CrewProfilePreviewList';
-import styles from '../../styles/Movie.module.css';
+import MediaContent from '../../components/MediaContent';
+import { ListOfMedia } from '../../types/list-of-media.dto';
 import { Crew, MovieCredits } from '../../types/movie-credits.dto';
 import { MovieReleaseDates } from '../../types/movie-release-dates.dto';
 import { MovieReviews } from '../../types/movie-reviews.dto';
 import { Movie } from '../../types/movie.dto';
-import { getNumberWithSpaces } from '../../utils/numbers';
-import { getMinutesToHoursAndMinutes } from '../../utils/time';
-import { getResourcePath } from '../../utils/tmdbResources';
-import { ListOfMedia } from '../../types/list-of-media.dto';
 
 export const getServerSideProps = async ({
   params: { id },
@@ -77,142 +72,28 @@ const MoviePage: NextPage<Props> = ({
   }, [movieCredits.crew]);
 
   return (
-    <main>
-      <div className={styles.cover}>
-        <Image
-          alt={`${movie.title} cover`}
-          height={469}
-          src={getResourcePath(movie.backdrop_path)}
-          width={1300}
-        />
-      </div>
-      <div className={styles.movie}>
-        <div className={styles.moviePreview}>
-          <div className={styles.moviePoster}>
-            <Image
-              alt={movie.title}
-              height={390}
-              src={getResourcePath(movie.poster_path)}
-              width={260}
-            />
-          </div>
-          <div className="movie-rating">
-            <div className={styles.movieVote}>
-              <p className={styles.movieVoteScale}>
-                <span className={styles.movieVoteAverage}>
-                  {movie.vote_average}
-                </span>
-                /10
-              </p>
-              <p className={styles.movieShare}>
-                <span className={styles.movieShareIcon}>
-                  <Image
-                    alt=""
-                    height={13}
-                    src="/assets/icons/share.svg"
-                    width={13}
-                  />
-                </span>
-                Share
-              </p>
-            </div>
-            <p className={styles.movieVoteCount}>
-              {getNumberWithSpaces(movie.vote_count)}
-            </p>
-          </div>
-          <div className="movie-rate">
-            <p className={styles.movieRateText}>Rate this</p>
-            <div className={styles.movieRateStars}>
-              {[...Array(10)].map((k) => (
-                <div key={k}>
-                  <Image
-                    alt=""
-                    height={16}
-                    src="/assets/icons/star.svg"
-                    width={16}
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-        <div className={styles.movieDetails}>
-          <div className={styles.movieStats}>
-            <div className={styles.movieInfo}>
-              {
-                movieReleaseDates.results.find((e) => e.iso_3166_1 === 'DK')
-                  ?.release_dates[0].certification
-              }
-            </div>
-            <div className={styles.movieInfo}>
-              {getMinutesToHoursAndMinutes(movie.runtime)}
-            </div>
-            <div className={styles.movieInfo}>{movie.genres[0].name}</div>
-            <div className={styles.movieInfo}>{movie.release_date}</div>
-          </div>
-          <h2 className={styles.movieTitle}>{movie.title}</h2>
-          <div className={styles.movieDescription}>
-            <p className={styles.movieOverview}>{movie.overview}</p>
-            <div className={styles.postOverview}>
-              <div>
-                <div className={styles.movieRank}>
-                  <Image
-                    alt=""
-                    height={40}
-                    src="/assets/icons/rank-up.svg"
-                    width={40}
-                  />
-                  <div>
-                    <p className={styles.movieFactTitle}>Rank</p>
-                    <p className={styles.movieFactInfo}>59</p>
-                  </div>
-                </div>
-                <div className="movie-fact">
-                  <p className={styles.movieFactTitle}>Reviews</p>
-                  <p className={styles.movieFactInfo}>
-                    {movieReviews.total_results}
-                  </p>
-                </div>
-              </div>
-              <button className={styles.uppercaseButton}>
-                ADD TO WATCHLIST +
-              </button>
-            </div>
-          </div>
-          <div className={styles.movieCredits}>
-            <h2 className={styles.movieCreditsHeader}>
-              Director{movieExecutors.directors.length > 1 && 's'}
-            </h2>
-            <CrewProfilePreviewList list={movieExecutors.directors} />
-          </div>
-          <div className={styles.movieCredits}>
-            <h2 className={styles.movieCreditsHeader}>
-              Writer{movieExecutors.writers.length > 1 && 's'}
-            </h2>
-            <CrewProfilePreviewList list={movieExecutors.writers} />
-          </div>
-          <div className={styles.movieCredits}>
-            <h2 className={styles.movieCreditsHeader}>Cast</h2>
-            <CrewProfilePreviewList list={movieCredits.cast.slice(0, 20)} />
-          </div>
-        </div>
-      </div>
-
-      <div>
-        <h1>Similar movies</h1>
-        {similarMovies.results.map((movie) => (
-          <div key={movie.id}>
-            <Image
-              alt={movie.title}
-              height={240}
-              src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
-              width={240}
-            />
-            <h1>{movie.title}</h1>
-          </div>
-        ))}
-      </div>
-    </main>
+    <>
+      <MediaContent
+        backdropPath={movie.backdrop_path}
+        cast={movieCredits.cast.slice(0, 20)}
+        directors={movieExecutors.directors}
+        genre={movie.genres[0].name}
+        overview={movie.overview}
+        posterPath={movie.poster_path}
+        releaseDate={movie.release_date}
+        reviewsCount={movieReviews.total_results}
+        restrictionAge={
+          movieReleaseDates.results.find((e) => e.iso_3166_1 === 'DK')
+            ?.release_dates[0].certification || '0'
+        }
+        runTime={movie.runtime}
+        similarMediaContent={similarMovies.results}
+        title={movie.title}
+        voteAverage={movie.vote_average}
+        voteCount={movie.vote_count}
+        writers={movieExecutors.writers}
+      />
+    </>
   );
 };
 

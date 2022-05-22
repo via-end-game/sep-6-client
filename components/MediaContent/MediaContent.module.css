@@ -1,0 +1,179 @@
+.cover {
+  height: 469px;
+  margin-inline: auto;
+  max-width: 1300px;
+  position: relative;
+  width: 100%;
+}
+
+.cover::after {
+  background-color: #ffffff;
+  content: '';
+  height: 100%;
+  left: 0;
+  opacity: 0.1;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.cover img {
+  object-fit: cover;
+}
+
+.movie {
+  grid-template-columns: auto minmax(0, 1fr);
+  display: grid;
+  gap: 64px;
+  margin-inline: auto;
+  max-width: 1300px;
+  width: 100%;
+}
+
+.moviePreview {
+  margin: -96px 0 0 120px;
+}
+
+.moviePoster {
+  margin-bottom: 24px;
+}
+
+.movieVoteScale {
+  color: rgba(0, 0, 0, 0.25);
+  font-size: 20px;
+  font-weight: 300;
+}
+
+.movieVoteAverage {
+  color: #000000;
+  font-size: 40px;
+  font-weight: 600;
+}
+
+.movieVote {
+  align-items: flex-end;
+  display: flex;
+  justify-content: space-between;
+}
+
+.movieShare {
+  align-items: center;
+  display: flex;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.movieShareIcon {
+  margin-right: 8px;
+}
+
+.movieVoteCount {
+  font-size: 12px;
+  font-weight: 500;
+  margin-bottom: 24px;
+}
+
+.movieRateText {
+  color: rgba(0, 0, 0, 0.25);
+  font-weight: 400;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.movieRateStars {
+  display: flex;
+  justify-content: space-between;
+  opacity: 0.7;
+}
+
+.movieDetails {
+  margin-right: 64px;
+}
+
+.movieStats {
+  display: flex;
+  margin: 64px 0 16px;
+}
+
+.movieInfo {
+  border: 1.5px solid rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  color: rgba(0, 0, 0, 0.3);
+  font-weight: 600;
+  font-size: 12px;
+  padding: 4px 8px;
+}
+
+.movieInfo:not(:last-child) {
+  margin-right: 16px;
+}
+
+.movieTitle {
+  font-weight: 700;
+  font-size: 72px;
+  line-height: 76px;
+  margin-bottom: 48px;
+}
+
+.movieDescription {
+  margin: 0 64px 64px 0;
+}
+
+.movieOverview {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 155%;
+  margin-bottom: 54px;
+}
+
+.postOverview,
+.postOverview > div {
+  align-items: center;
+  display: flex;
+}
+
+.postOverview {
+  justify-content: space-between;
+}
+
+.movieRank {
+  align-items: center;
+  display: flex;
+  margin-right: 64px;
+}
+
+.movieRank > div {
+  margin-left: 16px;
+}
+
+.movieFactTitle {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  margin-bottom: 4px;
+}
+
+.movieFactInfo {
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 22px;
+}
+
+.uppercaseButton {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 155%;
+}
+
+.movieCredits {
+  margin-bottom: 72px;
+}
+
+.movieCreditsHeader {
+  color: rgba(0, 0, 0, 0.15);
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 155%;
+  margin-bottom: 40px;
+}

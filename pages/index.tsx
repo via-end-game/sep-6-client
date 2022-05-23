@@ -1,4 +1,5 @@
 import type { NextPage } from 'next';
+import Head from 'next/head';
 import MediaContentPreview from '../components/MediaContentPreview';
 import { Heading1Text, Heading2Text } from '../components/Text/Text';
 import TrailerPreview from '../components/TrailerPreview';
@@ -24,26 +25,34 @@ interface Props {
 
 const Index: NextPage<Props> = ({ popularMovies }) => {
   return (
-    <main>
-      <section
-        className={styles.trendingMediaContent}
-        id="trending-media-content"
-      >
-        <div
-          className={styles.trendingHeadingContainer}
-          style={{
-            backgroundImage: `url(${getResourcePath(
-              popularMovies.results[4].backdrop_path
-            )})`,
-          }}
+    <>
+      <Head>
+        <title>
+          Best Movies - search for your favorite movies and TV shows
+        </title>
+      </Head>
+      <main>
+        <section
+          className={styles.trendingMediaContent}
+          id="trending-media-content"
         >
-          <div className={styles.trendingHeading}>
-            <Heading1Text>Trending Movies and TV Shows</Heading1Text>
+          <div
+            className={styles.trendingHeadingContainer}
+            style={{
+              backgroundImage: `url(${getResourcePath(
+                popularMovies.results[4].backdrop_path
+              )})`,
+            }}
+          >
+            <div className={styles.trendingHeading}>
+              <Heading1Text>Trending Movies and TV Shows</Heading1Text>
+            </div>
           </div>
-        </div>
-        <div className={styles.trendingMediaContents}>
-          {splitArrayToChunks([...popularMovies.results].splice(0, 16), 4).map(
-            (column: SimilarMovieResult[], index: number) => (
+          <div className={styles.trendingMediaContents}>
+            {splitArrayToChunks(
+              [...popularMovies.results].splice(0, 16),
+              4
+            ).map((column: SimilarMovieResult[], index: number) => (
               <div key={index} className={styles.trendingMediaColumn}>
                 {column.map(({ id, poster_path, title }) => (
                   <div className={styles.mediaContentPreviewWrapper} key={id}>
@@ -56,48 +65,48 @@ const Index: NextPage<Props> = ({ popularMovies }) => {
                   </div>
                 ))}
               </div>
-            )
-          )}
-        </div>
-      </section>
-      <section className={styles.latestTrailers} id="latest-trailers">
-        <div className="page-container">
-          <div className={styles.latestTrailersHeading}>
-            <Heading2Text>Latest {'\n'}trailers</Heading2Text>
+            ))}
           </div>
-          <div className={styles.latestTrailersList}>
-            <TrailerPreview
-              description="Season 3 Official Trailer"
-              thumbnailPath={
-                'https://www.themoviedb.org/t/p/w710_and_h400_multi_faces/Sh5LSKzJB3LiZw5bbK7BlCPy9c.jpg'
-              }
-              title="Love, Victor"
-            />
-            <TrailerPreview
-              description="Volume 3 Final Trailer"
-              thumbnailPath={
-                'https://www.themoviedb.org/t/p/w710_and_h400_multi_faces/nBrkOZyI75artyizuBFeya48KbO.jpg'
-              }
-              title="Love, Death & Robots"
-            />
-            <TrailerPreview
-              description="Season 3 Official Trailer"
-              thumbnailPath={
-                'https://www.themoviedb.org/t/p/w710_and_h400_multi_faces/qJxzjUjCpTPvDHldNnlbRC4OqEh.jpg'
-              }
-              title="The Umbrella Academy"
-            />
-            <TrailerPreview
-              description="Season 3 Official Trailer"
-              thumbnailPath={
-                'https://www.themoviedb.org/t/p/w710_and_h400_multi_faces/mGVrXeIjyecj6TKmwPVpHlscEmw.jpg'
-              }
-              title="The Boys"
-            />
+        </section>
+        <section className={styles.latestTrailers} id="latest-trailers">
+          <div className="page-container">
+            <div className={styles.latestTrailersHeading}>
+              <Heading2Text>Latest {'\n'}trailers</Heading2Text>
+            </div>
+            <div className={styles.latestTrailersList}>
+              <TrailerPreview
+                description="Season 3 Official Trailer"
+                thumbnailPath={
+                  'https://www.themoviedb.org/t/p/w710_and_h400_multi_faces/Sh5LSKzJB3LiZw5bbK7BlCPy9c.jpg'
+                }
+                title="Love, Victor"
+              />
+              <TrailerPreview
+                description="Volume 3 Final Trailer"
+                thumbnailPath={
+                  'https://www.themoviedb.org/t/p/w710_and_h400_multi_faces/nBrkOZyI75artyizuBFeya48KbO.jpg'
+                }
+                title="Love, Death & Robots"
+              />
+              <TrailerPreview
+                description="Season 3 Official Trailer"
+                thumbnailPath={
+                  'https://www.themoviedb.org/t/p/w710_and_h400_multi_faces/qJxzjUjCpTPvDHldNnlbRC4OqEh.jpg'
+                }
+                title="The Umbrella Academy"
+              />
+              <TrailerPreview
+                description="Season 3 Official Trailer"
+                thumbnailPath={
+                  'https://www.themoviedb.org/t/p/w710_and_h400_multi_faces/mGVrXeIjyecj6TKmwPVpHlscEmw.jpg'
+                }
+                title="The Boys"
+              />
+            </div>
           </div>
-        </div>
-      </section>
-    </main>
+        </section>
+      </main>
+    </>
   );
 };
 

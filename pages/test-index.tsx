@@ -1,7 +1,6 @@
 import { NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
-import styles from './test-index.module.css';
 import { ListOfMedia } from '../types/list-of-media.dto';
 
 export const getServerSideProps = async () => {
@@ -38,7 +37,7 @@ const TestHome: NextPage<Props> = ({
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.container}>
+      <main>
         <h1>Popular Movies</h1>
         {trendingMovies.results.map((movie) => (
           <div key={movie.id}>

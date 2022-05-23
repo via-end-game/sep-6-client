@@ -1,0 +1,66 @@
+.trendingMediaContent {
+  margin-bottom: 196px;
+}
+
+.trendingHeadingContainer {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: grid;
+  height: 688px;
+  place-items: center;
+  position: relative;
+  width: 100%;
+}
+
+.trendingHeadingContainer::after {
+  background-image: linear-gradient(
+    180deg,
+    #000000 0%,
+    rgba(0, 0, 0, 0) 53.65%,
+    #000000 100%
+  );
+  content: '';
+  height: 100%;
+  position: absolute;
+  width: 100%;
+}
+
+.trendingHeadingContainer * {
+  z-index: 1;
+}
+
+.trendingHeading {
+  max-width: 586px;
+  text-align: center;
+  width: 100%;
+}
+
+.trendingMediaContents {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(4, 208px);
+  justify-content: center;
+}
+
+.trendingMediaColumn:nth-child(odd) {
+  margin-top: -64px;
+}
+
+.mediaContentPreviewWrapper:not(:last-child) {
+  margin-bottom: 14px;
+}
+
+.latestTrailers {
+  margin-bottom: 196px;
+}
+
+.latestTrailersHeading {
+  margin-bottom: 96px;
+}
+
+.latestTrailersList {
+  display: grid;
+  gap: 64px 16px;
+  grid-template-columns: repeat(2, 1fr);
+}

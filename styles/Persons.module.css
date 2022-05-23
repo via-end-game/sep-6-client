@@ -1,0 +1,174 @@
+.mainContainer {
+  padding-left: 4%;
+  padding-top: 4%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.imageWrapper {
+  border-radius: 25px;
+}
+
+.scrollmenu {
+  overflow: auto;
+  white-space: nowrap;
+}
+
+/* New styles */
+.personPage {
+  padding-top: 128px;
+}
+
+.profile {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 196px;
+}
+
+.profileDetails {
+  margin-left: -24px;
+  z-index: 2;
+}
+
+.profileName {
+  display: table-caption;
+  margin-bottom: 24px;
+}
+
+.profileActivity {
+  color: rgba(255, 255, 255, 0.6);
+  font-family: 'Inter';
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 100%;
+  letter-spacing: 0.01em;
+}
+
+.biography {
+  margin-bottom: 196px;
+}
+
+.biographyDescription {
+  font-family: 'Inter';
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 175%;
+  margin: 64px 0 64px auto;
+  opacity: 0.95;
+  white-space: pre-line;
+  width: calc(100% - 80px);
+}
+
+.biographyReadMoreButton {
+  display: flex;
+  justify-content: center;
+}
+
+.personalInformation {
+  margin-bottom: 196px;
+}
+
+.personalInformationBar {
+  background-color: rgba(20, 20, 20, 0.25);
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 64px;
+  padding: 64px;
+}
+
+.personalInformationBarElement {
+  padding-inline: 48px;
+  white-space: pre-line;
+}
+
+.personalInformationTitle {
+  font-family: 'Syne';
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.personalInformationValue {
+  font-family: 'Inter';
+  font-size: 15px;
+  font-weight: 300;
+  opacity: 0.8;
+  line-height: 140%;
+  text-align: center;
+}
+
+.knownFor {
+  margin-bottom: 196px;
+}
+
+.knownForHeading {
+  margin-bottom: 64px;
+}
+
+.knownForMediaList {
+  display: grid;
+  gap: 64px;
+  grid-template-columns: repeat(3, 208px);
+  justify-content: end;
+}
+
+.knownForMediaList > div > a:not(:last-child) {
+  display: inline-block;
+  margin-bottom: 64px;
+}
+
+.knownForMediaList > div:nth-child(2) {
+  margin-top: 64px;
+}
+
+.knownForMediaList > div:nth-child(3) {
+  margin-top: 128px;
+}
+
+.filmography {
+  margin-bottom: 196px;
+}
+
+.filmographyHeader {
+  margin-bottom: 96px;
+}
+
+.filmographyInformation {
+  display: flex;
+  justify-content: space-between;
+}
+
+.filmographyDepartament {
+  align-items: center;
+  display: flex;
+  font-family: 'Inter';
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 12px;
+  opacity: 0.5;
+}
+
+.filmographyDepartamentSelected {
+  opacity: 1;
+}
+
+.filmographyDepartamentSelected .filmographyDepartamentAmount {
+  opacity: 0.35;
+}
+
+.filmographyDepartamentAmount {
+  font-family: 'Inter';
+  font-size: 11px;
+  font-weight: 400;
+  margin-left: 4px;
+  opacity: 0;
+}
+
+.filmographyList {
+  max-width: 592px;
+  width: 100%;
+}

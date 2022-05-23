@@ -19,6 +19,8 @@ jobs:
           envVariableKeys: TMDB_API_KEY
         env:
           TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
+          TARGET_TMDB_API_KEY: preview,development,production
+          TYPE_TMDB_API_KEY: encrypted
 
       # deploy app to vercel
       - name: deploy site to vercel

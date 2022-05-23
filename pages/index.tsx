@@ -71,7 +71,7 @@ const Index: NextPage<Props> = ({ popularMovies }) => {
         <section className={styles.latestTrailers} id="latest-trailers">
           <div className="page-container">
             <div className={styles.latestTrailersHeading}>
-              <Heading2Text>Latest {'\n'}trailers</Heading2Text>
+              <Heading2Text>Latest {'\n'}Trailers</Heading2Text>
             </div>
             <div className={styles.latestTrailersList}>
               <TrailerPreview

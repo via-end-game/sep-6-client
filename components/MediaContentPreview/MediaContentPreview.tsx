@@ -28,7 +28,7 @@ const MediaContentPreview: React.FC<Props> = ({
           />
           {showTitle && (
             <div className={styles.mediaContentPreviewTitleContainer}>
-              <Heading3Text text={title} />
+              <Heading3Text>{title}</Heading3Text>
             </div>
           )}
         </div>

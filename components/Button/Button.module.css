@@ -3,6 +3,7 @@
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.01em;
+  margin-left: -16px;
   opacity: 0.7;
   padding: 8px 16px;
   position: relative;
@@ -16,6 +17,10 @@
   position: absolute;
   right: -32px;
   top: 9px;
+}
+
+.watchListPlus {
+  right: -8px;
 }
 
 .loadMoreButton:hover {
@@ -39,4 +44,25 @@
   transform-origin: 150% 150%;
   transition: transform 400ms ease-in-out, opacity 400ms ease-in-out;
   width: 64px;
+}
+
+.customList {
+  align-items: center;
+  background-color: #ffffff;
+  color: #000000;
+  display: flex;
+  font-family: 'Syne';
+  font-size: 13px;
+  font-weight: 700;
+  justify-content: center;
+  letter-spacing: 0.01em;
+  padding: 11px 0;
+  text-transform: uppercase;
+  width: 100%;
+}
+
+.customListIconContainer {
+  font-size: 0;
+  margin-right: 8px;
+  position: relative;
 }

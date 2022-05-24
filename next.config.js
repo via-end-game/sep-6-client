@@ -6,6 +6,7 @@ const nextConfig = {
       'tmdb.org',
       'themoviedb.org',
       'www.themoviedb.org',
+      'i.ytimg.com',
     ],
   },
   reactStrictMode: true,

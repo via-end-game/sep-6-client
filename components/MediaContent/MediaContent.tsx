@@ -123,18 +123,6 @@ const MediaContent: React.FC<Props> = (props) => {
             </div>
           </div>
           <div className={styles.movieCredits}>
-            <h2 className={styles.movieCreditsHeader}>
-              Director{props.directors.length > 1 && 's'}
-            </h2>
-            <CrewProfilePreviewList list={props.directors} />
-          </div>
-          <div className={styles.movieCredits}>
-            <h2 className={styles.movieCreditsHeader}>
-              Writer{props.writers.length > 1 && 's'}
-            </h2>
-            <CrewProfilePreviewList list={props.writers} />
-          </div>
-          <div className={styles.movieCredits}>
             <h2 className={styles.movieCreditsHeader}>Cast</h2>
             <CrewProfilePreviewList list={props.cast.slice(0, 20)} />
           </div>

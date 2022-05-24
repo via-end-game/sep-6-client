@@ -5,7 +5,7 @@ interface Props {
   character: string;
   id: number;
   title: string;
-  year: number;
+  year: number | string;
 }
 
 const Filmography: React.FC<Props> = ({ character, id, title, year }) => (

@@ -1,13 +1,21 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import type { NextApiRequest, NextApiResponse } from 'next';
+import nextConnect from 'next-connect';
+import { Storage } from '@google-cloud/storage';
 
-type Data = {
-  name: string;
-};
+let projectId = 'sep6-351006'; // Get this from Google Cloud
+let keyFilename = 'sep6.json'; // Get this from Google Cloud -> Credentials -> Service Accounts
+const storage = new Storage({
+  projectId,
+  keyFilename,
+});
+const bucket = storage.bucket('sep6_images_bucket');
 
-export default function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<Data>
-) {
-  res.status(200).json({ name: 'John Doe' });
-}
+export default nextConnect().get(async (req: any, res: any) => {
+  try {
+    const [files] = await bucket.getFiles();
+    res.send([files]);
+  } catch (error) {
+    res.send('Error:' + error);
+  }
+  res.status(200).json('Everything is ok');
+});

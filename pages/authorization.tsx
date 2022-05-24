@@ -2,20 +2,6 @@ import { NextPage } from 'next';
 
 const submit = async (event: any) => {
   event.preventDefault();
-  // const data = {
-  //   email: event.target.email.value,
-  //   password: event.target.password.value,
-  // };
-
-  // const JSONdata = JSON.stringify(data);
-  // console.log(JSONdata);
-
-  // const options = {
-  //   // The method is POST because we are sending data.
-  //   method: 'POST',
-  //   // Body of the request is the JSON data we created above.
-  //   body: JSONdata,
-  // };
 
   const response = await fetch('http://localhost:3001/v1/auth/log-in', {
     method: 'POST',

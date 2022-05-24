@@ -1,0 +1,59 @@
+.trailer {
+  width: 729px;
+}
+
+.video {
+  background-color: #191919;
+  height: 410px;
+  position: relative;
+  width: 100%;
+}
+
+.video img {
+  position: relative;
+}
+
+.video img::before {
+  background-color: #191919;
+  content: '';
+  height: 410px;
+  left: 0;
+  position: absolute;
+  width: 100%;
+}
+
+.video::after {
+  background-color: #000000;
+  content: '';
+  height: 100%;
+  opacity: 0.35;
+  position: absolute;
+  transition: opacity 450ms ease-out;
+  width: 100%;
+}
+
+.video:hover::after {
+  opacity: 0;
+}
+
+.title {
+  font-family: 'Syne';
+  font-size: 22px;
+  font-weight: 700;
+  margin: 16px 32px 0 32px;
+  position: relative;
+}
+
+.playButton {
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 50%;
+  display: inline-block;
+  font-size: 0;
+  left: 50%;
+  opacity: 0.6;
+  padding: 36px;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}

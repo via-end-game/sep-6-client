@@ -18,6 +18,7 @@ import { MovieVideos } from '../../types/movie-videos.dto';
 import { Movie } from '../../types/movie.dto';
 import { getNumberWithCommas, getNumberWithSpaces } from '../../utils/numbers';
 import { getMovieVideos } from '../../utils/requests';
+// import { getMovieVideos } from '../../utils/requests';
 import { getResourcePath } from '../../utils/tmdbResources';
 
 export const getServerSideProps = async ({
@@ -233,16 +234,16 @@ const MoviePage: NextPage<Props> = ({
             ))}
           </div>
           <div className={styles.topCrews}>
-            {movieExecutors.directors.map(({ id, name }) => (
+            {movieExecutors.directors.map(({ id }) => (
               <div className={styles.topCrew} key={id}>
                 <p className={styles.topCrewJob}>Director</p>
-                <p className={styles.topCrewName}>{name}</p>
+                <p className={styles.topCrewName}>Quentin Tarantino</p>
               </div>
             ))}
-            {movieExecutors.writers.map(({ id, name }) => (
+            {movieExecutors.writers.map(({ id }) => (
               <div className={styles.topCrew} key={id}>
                 <p className={styles.topCrewJob}>Writers</p>
-                <p className={styles.topCrewName}>{name}</p>
+                <p className={styles.topCrewName}>Quentin Tarantino</p>
               </div>
             ))}
           </div>
@@ -253,13 +254,9 @@ const MoviePage: NextPage<Props> = ({
           <Heading2Text>Videos</Heading2Text>
         </div>
         <div className={styles.videosList}>
-          {movieVideos.results
-            .filter(
-              ({ type }) => type === 'Trailer' || type === 'Behind the Scenes'
-            )
-            .map(({ id, key, name }) => (
-              <MediaPageTrailer id={key} key={id} title={name} />
-            ))}
+          {movieVideos.results.map(({ id, key, name }) => (
+            <MediaPageTrailer id={key} key={id} title={name} />
+          ))}
         </div>
       </section>
       <section className={styles.castSection} id="cast">

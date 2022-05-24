@@ -1,17 +1,19 @@
 import { NextPage } from 'next';
 import Image from 'next/image';
+import { useState } from 'react';
 import { LoadMoreButton } from '../../components/Button/Button';
 import Filmography from '../../components/Filmography';
 import MediaContentPreview from '../../components/MediaContentPreview';
 import { Heading1Text, Heading2Text } from '../../components/Text/Text';
 import styles from '../../styles/Persons.module.css';
-import {
-  Cast,
-  MovieCreditsBasedOnActor,
-} from '../../types/movie-credits-based-on-actor';
+import { MovieCreditsBasedOnActor } from '../../types/movie-credits-based-on-actor';
 import { Person } from '../../types/person.dto';
 import { splitArrayToChunks } from '../../utils/arrays';
 import { getAge, getExplicitDate } from '../../utils/date';
+import {
+  getSortMediaByRating as getMediaSortedByRating,
+  getSortMediaByYear as getMediaSortedByYear,
+} from '../../utils/mediaContent';
 import { getResourcePath } from '../../utils/tmdbResources';
 
 export const getServerSideProps = async ({
@@ -37,6 +39,14 @@ interface Props {
 }
 
 const ActorPage: NextPage<Props> = ({ actor, movieCredits }) => {
+  const [mediaSortedByRating] = useState(
+    splitArrayToChunks(
+      getMediaSortedByRating(movieCredits.cast).splice(0, 9),
+      3
+    )
+  );
+  const [mediaSortedByYear] = useState(getMediaSortedByYear(movieCredits.cast));
+
   return (
     <>
       <main className={styles.personPage}>
@@ -102,20 +112,18 @@ const ActorPage: NextPage<Props> = ({ actor, movieCredits }) => {
             <Heading2Text>Known {'\n'}For</Heading2Text>
           </div>
           <div className={styles.knownForMediaList}>
-            {getMostPopularMediaContents(movieCredits.cast).map(
-              (mediaContents, i) => (
-                <div key={mediaContents.reduce((s, e) => `${s}${e}`, `${i}`)}>
-                  {mediaContents.map(({ id, poster_path, title }) => (
-                    <MediaContentPreview
-                      key={id}
-                      link={`/movies/${id}`}
-                      posterPath={getResourcePath(poster_path || '')}
-                      title={title}
-                    />
-                  ))}
-                </div>
-              )
-            )}
+            {mediaSortedByRating.map((mediaContents, i) => (
+              <div key={mediaContents.reduce((s, e) => `${s}${e}`, `${i}`)}>
+                {mediaContents.map(({ id, poster_path, title }) => (
+                  <MediaContentPreview
+                    key={id}
+                    link={`/movies/${id}`}
+                    posterPath={getResourcePath(poster_path || '')}
+                    title={title}
+                  />
+                ))}
+              </div>
+            ))}
           </div>
         </section>
         <section
@@ -140,16 +148,18 @@ const ActorPage: NextPage<Props> = ({ actor, movieCredits }) => {
               <p className={styles.filmographyDepartament}>Creator</p>
             </div>
             <div className={styles.filmographyList}>
-              {movieCredits.cast.map(
+              {mediaSortedByYear.map(
                 ({ character, id, release_date, title }) => (
                   <Filmography
                     character={character}
                     id={id}
                     key={id}
                     title={title}
-                    year={parseInt(
-                      (release_date || '2000-01-01').split('-')[0]
-                    )}
+                    year={
+                      release_date
+                        ? parseInt(release_date.split('-')[0])
+                        : 'Unknown'
+                    }
                   />
                 )
               )}
@@ -159,10 +169,6 @@ const ActorPage: NextPage<Props> = ({ actor, movieCredits }) => {
       </main>
     </>
   );
-};
-
-const getMostPopularMediaContents = (mediaContents: Cast[]) => {
-  return splitArrayToChunks([...mediaContents].splice(0, 9), 3);
 };
 
 const getDetailedInfoActorFetch = (id: string): Promise<Person> =>

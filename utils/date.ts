@@ -20,3 +20,6 @@ export const getExplicitDate = (date: string): string => {
 
   return `${day} ${month} ${year}`;
 };
+
+export const getYear = (date: string | Date): number =>
+  new Date(date).getFullYear();

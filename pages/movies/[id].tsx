@@ -97,6 +97,7 @@ const MoviePage: NextPage<Props> = ({
               alt={`${movie.title} backdrop`}
               layout="fill"
               objectFit="cover"
+              priority={true}
               src={getResourcePath(movie.backdrop_path)}
             />
           </div>
@@ -111,6 +112,7 @@ const MoviePage: NextPage<Props> = ({
                 alt={`${movie.title} poster`}
                 layout="fill"
                 objectFit="cover"
+                priority={true}
                 src={getResourcePath(movie.poster_path)}
               />
             </div>
@@ -227,24 +229,37 @@ const MoviePage: NextPage<Props> = ({
           <div className={styles.topCasts}>
             {movieCredits.cast.slice(0, 3).map(({ character, id, name }) => (
               <div className={styles.topCast} key={id}>
-                <p className={styles.topCastCharacter}>{character}</p>
-                <p className={styles.topCastName}>{name}</p>
+                <p className={styles.topCastCharacter}>
+                  {character.replaceAll('/', '\n')}
+                </p>
+                <div>
+                  <p className={styles.topCastName}>{name}</p>
+                </div>
               </div>
             ))}
           </div>
           <div className={styles.topCrews}>
-            {movieExecutors.directors.map(({ id, name }) => (
-              <div className={styles.topCrew} key={id}>
-                <p className={styles.topCrewJob}>Director</p>
-                <p className={styles.topCrewName}>{name}</p>
+            {movieExecutors.directors.length > 0 && (
+              <div className={styles.topCrew}>
+                <p className={styles.topCrewJob}>
+                  Director{movieExecutors.directors.length > 1 && 's'}
+                </p>
+                <p className={styles.topCrewName}>
+                  {movieExecutors.directors.map(({ name }) => name).join(', ')}
+                </p>
               </div>
-            ))}
-            {movieExecutors.writers.map(({ id, name }) => (
-              <div className={styles.topCrew} key={id}>
-                <p className={styles.topCrewJob}>Writers</p>
-                <p className={styles.topCrewName}>{name}</p>
+            )}
+
+            {movieExecutors.writers.length > 0 && (
+              <div className={styles.topCrew}>
+                <p className={styles.topCrewJob}>
+                  Writer{movieExecutors.writers.length > 1 && 's'}
+                </p>
+                <p className={styles.topCrewName}>
+                  {movieExecutors.writers.map(({ name }) => name).join(', ')}
+                </p>
               </div>
-            ))}
+            )}
           </div>
         </div>
       </section>

@@ -13,19 +13,21 @@ const Header: React.FC = () => {
             </a>
           </Link>
           <div className={styles.separator} />
-          <button
-            className={`${styles.searchContainer} ${styles.navigationItem}`}
-          >
-            <div className={styles.searchIcon}>
-              <Image
-                alt=""
-                height={12}
-                src="/assets/icons/search.svg"
-                width={12}
-              />
-            </div>
-            Search
-          </button>
+          <Link href="/search">
+            <button
+              className={`${styles.searchContainer} ${styles.navigationItem}`}
+            >
+              <div className={styles.searchIcon}>
+                <Image
+                  alt=""
+                  height={12}
+                  src="/assets/icons/search.svg"
+                  width={12}
+                />
+              </div>
+              Search
+            </button>
+          </Link>
         </div>
         <div>
           <Link href="/">

@@ -56,6 +56,7 @@ const ActorPage: NextPage<Props> = ({ actor, movieCredits }) => {
             height={525}
             objectFit="cover"
             src={getResourcePath(actor.profile_path)}
+            unoptimized={true}
             width={415}
           />
           <div className={styles.profileDetails}>

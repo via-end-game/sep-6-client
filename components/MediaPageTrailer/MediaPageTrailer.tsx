@@ -14,9 +14,16 @@ const MediaPageTrailer: React.FC<Props> = ({ id, title }) => (
         layout="fill"
         objectFit="cover"
         src={`https://i.ytimg.com/vi/${id}/maxresdefault.jpg`}
+        unoptimized={true}
       />
       <div className={styles.playButton}>
-        <Image alt="" height={16} src="/assets/icons/play.svg" width={16} />
+        <Image
+          alt=""
+          height={16}
+          src="/assets/icons/play.svg"
+          unoptimized={true}
+          width={16}
+        />
       </div>
     </div>
     <p className={styles.title}>{title}</p>

@@ -99,6 +99,7 @@ const MoviePage: NextPage<Props> = ({
               objectFit="cover"
               priority={true}
               src={getResourcePath(movie.backdrop_path)}
+              unoptimized={true}
             />
           </div>
           <div className={styles.backdropPlayContainer}>
@@ -114,6 +115,7 @@ const MoviePage: NextPage<Props> = ({
                 objectFit="cover"
                 priority={true}
                 src={getResourcePath(movie.poster_path)}
+                unoptimized={true}
               />
             </div>
             <ToCustomListButton mediaType="movie" />
@@ -128,6 +130,7 @@ const MoviePage: NextPage<Props> = ({
                     alt=""
                     height={16}
                     src="/assets/icons/share.svg"
+                    unoptimized={true}
                     width={16}
                   />
                 </div>
@@ -144,54 +147,63 @@ const MoviePage: NextPage<Props> = ({
                   alt=""
                   height={14}
                   src="/assets/icons/star-full.svg"
+                  unoptimized={true}
                   width={14}
                 />
                 <Image
                   alt=""
                   height={14}
                   src="/assets/icons/star-full.svg"
+                  unoptimized={true}
                   width={14}
                 />
                 <Image
                   alt=""
                   height={14}
                   src="/assets/icons/star-full.svg"
+                  unoptimized={true}
                   width={14}
                 />
                 <Image
                   alt=""
                   height={14}
                   src="/assets/icons/star-full.svg"
+                  unoptimized={true}
                   width={14}
                 />
                 <Image
                   alt=""
                   height={14}
                   src="/assets/icons/star-full.svg"
+                  unoptimized={true}
                   width={14}
                 />
                 <Image
                   alt=""
                   height={14}
                   src="/assets/icons/star-full.svg"
+                  unoptimized={true}
                   width={14}
                 />
                 <Image
                   alt=""
                   height={14}
                   src="/assets/icons/star-full.svg"
+                  unoptimized={true}
                   width={14}
                 />
                 <Image
                   alt=""
                   height={14}
                   src="/assets/icons/star.svg"
+                  unoptimized={true}
                   width={14}
                 />
                 <Image
                   alt=""
                   height={14}
                   src="/assets/icons/star.svg"
+                  unoptimized={true}
                   width={14}
                 />
               </div>

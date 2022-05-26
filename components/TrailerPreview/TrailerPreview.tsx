@@ -20,6 +20,7 @@ const TrailerPreview: React.FC<Props> = ({
         layout="fill"
         objectFit="cover"
         src={thumbnailPath}
+        unoptimized={true}
       />
     </div>
     <div className={styles.textContent}>

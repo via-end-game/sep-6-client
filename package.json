@@ -18,7 +18,10 @@
     "build-storybook": "build-storybook"
   },
   "dependencies": {
+    "@google-cloud/secret-manager": "^3.12.0",
+    "@google-cloud/storage": "^6.0.0",
     "next": "12.1.6",
+    "next-connect": "^0.12.2",
     "react": "18.1.0",
     "react-dom": "18.1.0"
   },

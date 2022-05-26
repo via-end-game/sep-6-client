@@ -33,3 +33,6 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
+
+# Service account key with the access to the Secret Manager and Cloud Storage
+credentials.json

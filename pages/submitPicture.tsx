@@ -1,24 +1,23 @@
 import { NextPage } from 'next';
-const submit = async (event: any) => {
-  event.preventDefault();
 
-  const response = await fetch('/api/hello', {
+const getSecrets = async (event: any) => {
+  event.preventDefault();
+  const response = await fetch('/api/getCredentials', {
     method: 'GET',
   });
-  response.json().then((x) => {
-    for (let y = 0; y < x[0].length; y++) {
-      const newimg = document.createElement('img');
-      newimg.setAttribute(
-        'src',
-        'https://storage.cloud.google.com/sep6_images_bucket/' + x[0][y].id
-      );
-      newimg.setAttribute('width', '50');
-      newimg.setAttribute('height', '50');
-      // @ts-ignore
-      document.getElementById('images').appendChild(newimg);
-    }
+  response.json().then((res) => {
+    console.log('Response: ' + res);
   });
-  console.log('Response is', response);
+};
+
+const submit = async (event: any) => {
+  event.preventDefault();
+  const response = await (
+    await fetch('/api/getImages', {
+      method: 'GET',
+    })
+  ).json();
+  console.log('Response: ', response);
 };
 
 const SubmitPicture: NextPage = () => {
@@ -27,6 +26,7 @@ const SubmitPicture: NextPage = () => {
       <h2>Google Storage API Test</h2>
       <input type="file" name="imgfile" accept="image/jpeg" id="imgfile" />
       <button onClick={submit}>Submit</button>
+      <button onClick={getSecrets}>Get secrets</button>
       <div className="" id="images"></div>
     </div>
   );

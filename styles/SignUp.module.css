@@ -1,0 +1,145 @@
+.signUpContainer {
+  position: relative;
+}
+
+.signUpBackground {
+  left: 196px;
+  position: absolute;
+  top: 0;
+  width: 960px;
+  z-index: 1;
+}
+
+.signUpBackground img {
+  object-fit: cover;
+}
+
+.signUpBackground span::after {
+  background: radial-gradient(
+      70.48% 70.48% at 50.05% 29.52%,
+      rgba(0, 0, 0, 0) 0%,
+      #000000 100%
+    ),
+    linear-gradient(90deg, #000000 5%, rgba(0, 0, 0, 0.2) 50%, #000000 95%);
+  content: '';
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+}
+
+.contentContainer {
+  padding-top: 256px;
+}
+
+.title {
+  font-family: 'Syne';
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 101%;
+  margin-bottom: 16px;
+  opacity: 0.8;
+}
+
+.callToSignIn {
+  color: rgba(255, 255, 255, 0.7);
+  font-family: 'Inter';
+  font-size: 12px;
+  font-weight: 400;
+  margin-bottom: 40px;
+}
+
+.callToSignInLink {
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.formContainer {
+  max-width: 320px;
+  width: 320px;
+}
+
+.form {
+  display: grid;
+  gap: 24px;
+}
+
+.inputContainer {
+  position: relative;
+}
+
+.inputLabelPicture {
+  display: block;
+  margin-bottom: 20px;
+}
+
+.imagesContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.imagePlacholder {
+  background-color: #191919;
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+}
+
+.input {
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  font-family: 'Inter';
+  font-size: 14px;
+  font-weight: 500;
+  outline: none;
+  padding: 16px;
+  width: 100%;
+}
+
+.input:focus {
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.input:focus + .inputLabel {
+  opacity: 1;
+  transform: scale(1, 1) translateY(-50%);
+}
+
+.input::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.inputLabel {
+  background-color: #000000;
+  color: rgba(255, 255, 255, 0.5);
+  font-family: 'Inter';
+  font-weight: 500;
+  font-size: 11px;
+  left: -8px;
+  opacity: 0;
+  padding: 8px;
+  position: absolute;
+  top: 0;
+  transform: scale(0.5, 0.5);
+  transition: opacity 350ms ease, transform 350ms ease;
+}
+
+.inputLabelPicture {
+  color: rgba(255, 255, 255, 0.5);
+  font-family: 'Inter';
+  font-size: 11px;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.formButton {
+  margin-top: 24px;
+}

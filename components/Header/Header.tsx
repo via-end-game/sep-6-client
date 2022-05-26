@@ -37,7 +37,7 @@ const Header: React.FC = () => {
             <a className={styles.navigationItem}>Trending TV Shows</a>
           </Link>
           <div className={styles.separator} />
-          <Link href="/">
+          <Link href="/sign-up">
             <a className={styles.navigationItem}>Sign Up</a>
           </Link>
         </div>

@@ -5,8 +5,8 @@ interface ButtonProps {
   children: string;
 }
 
-export const Button: React.FC<ButtonProps> = () => (
-  <div className={styles.button}>Not Implemented</div>
+export const Button: React.FC<ButtonProps> = ({ children }) => (
+  <button className={styles.customList}>{children}</button>
 );
 
 interface LoadMoreButtonProps {

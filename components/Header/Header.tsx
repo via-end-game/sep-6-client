@@ -22,6 +22,7 @@ const Header: React.FC = () => {
                   alt=""
                   height={12}
                   src="/assets/icons/search.svg"
+                  unoptimized={true}
                   width={12}
                 />
               </div>

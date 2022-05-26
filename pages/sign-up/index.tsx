@@ -13,6 +13,7 @@ const SignUpPage: NextPage = () => {
             alt=""
             height={764}
             src="https://www.themoviedb.org/t/p/w1066_and_h600_bestv2/vv5a8u6e40kyH0Hp6HuamAgzRai.jpg"
+            unoptimized={true}
             width={920}
           />
         </div>

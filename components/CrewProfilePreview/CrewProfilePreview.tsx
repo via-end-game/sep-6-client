@@ -19,6 +19,7 @@ const CrewProfilePreview: React.FC<Props> = ({
           alt={`${name} profile`}
           height={68}
           src={picturePath}
+          unoptimized={true}
           width={68}
         />
       ) : (

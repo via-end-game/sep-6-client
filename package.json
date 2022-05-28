@@ -8,7 +8,7 @@
     "npm": "please-use-yarn"
   },
   "scripts": {
-    "dev": "cross-env NODE_OPTIONS='--inspect' next dev",
+    "dev": "cross-env NODE_OPTIONS='--inspect' next dev -p 3000",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "next": "12.1.6",
+    "next-auth": "^4.3.4",
     "react": "18.1.0",
     "react-dom": "18.1.0"
   },

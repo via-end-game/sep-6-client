@@ -1,8 +1,15 @@
+import { signOut, useSession } from 'next-auth/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from './Header.module.css';
 
 const Header: React.FC = () => {
+  const { data: session } = useSession();
+
+  const signOutHandler = () => {
+    signOut();
+  };
+
   return (
     <header className={styles.header}>
       <div className={`${styles.headerContainer} page-container`}>
@@ -38,9 +45,16 @@ const Header: React.FC = () => {
             <a className={styles.navigationItem}>Trending TV Shows</a>
           </Link>
           <div className={styles.separator} />
-          <Link href="/sign-up">
-            <a className={styles.navigationItem}>Sign Up</a>
-          </Link>
+          {!session && (
+            <Link href="/auth/sign-up">
+              <a className={styles.navigationItem}>Sign Up</a>
+            </Link>
+          )}
+          {session && (
+            <button className={styles.navigationItem} onClick={signOutHandler}>
+              Sign Out
+            </button>
+          )}
         </div>
       </div>
     </header>

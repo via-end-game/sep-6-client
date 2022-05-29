@@ -2,12 +2,32 @@ import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 
 export default NextAuth({
+  callbacks: {
+    session: async ({ session, token }) => {
+      if (session?.user) {
+        session.user.avatarUrl = token.avatarUrl;
+        session.user.name = token.name;
+        session.user.email = token.email;
+        session.user.id = token.uid;
+      }
+      return session;
+    },
+    jwt: async ({ user, token }) => {
+      if (user) {
+        token.avatarUrl = user.avatarUrl;
+        token.email = user.email;
+        token.name = user.username;
+        token.uid = user.userID;
+      }
+      return token;
+    },
+  },
   providers: [
     CredentialsProvider({
       async authorize(credentials) {
         try {
           const { email, password } = credentials;
-          const response = await fetch('http://localhost:3005/login', {
+          const response = await fetch(`${process.env.GCF_URL}/log-in`, {
             body: JSON.stringify({ email, password }),
             headers: {
               'Content-Type': 'application/json',
@@ -29,6 +49,6 @@ export default NextAuth({
   ],
   secret: process.env.JWT_SECRET,
   session: {
-    jwt: true,
+    strategy: 'jwt',
   },
 });

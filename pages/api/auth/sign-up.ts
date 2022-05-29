@@ -16,7 +16,7 @@ const handler = async (
   const { avatarUrl, email, name, password } = data;
 
   try {
-    const response = await fetch('http://localhost:3005/register', {
+    const response = await fetch(`${process.env.GCF_URL}/register`, {
       body: JSON.stringify({ avatarUrl, email, username: name, password }),
       headers: {
         'Content-Type': 'application/json',

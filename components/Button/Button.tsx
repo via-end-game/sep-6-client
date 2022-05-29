@@ -28,9 +28,13 @@ export const LoadMoreButton: React.FC<LoadMoreButtonProps> = ({ text }) => (
   </button>
 );
 
-export const WatchListButton: React.FC = () => (
+interface FavoriteListButtonProps {
+  handler: () => void;
+}
+
+export const FavoriteListButton: React.FC<FavoriteListButtonProps> = () => (
   <button className={styles.loadMoreButton}>
-    Add to watch list
+    Add to favorite list
     <span className={`${styles.watchListPlus} ${styles.loadMoreButtonArrow}`}>
       <Image
         alt=""

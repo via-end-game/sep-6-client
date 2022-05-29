@@ -1,14 +1,10 @@
-import { signOut, useSession } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from './Header.module.css';
 
 const Header: React.FC = () => {
   const { data: session } = useSession();
-
-  const signOutHandler = () => {
-    signOut();
-  };
 
   return (
     <header className={styles.header}>
@@ -51,9 +47,9 @@ const Header: React.FC = () => {
             </Link>
           )}
           {session && (
-            <button className={styles.navigationItem} onClick={signOutHandler}>
-              Sign Out
-            </button>
+            <Link href="/profile">
+              <a className={styles.navigationItem}>Profile</a>
+            </Link>
           )}
         </div>
       </div>

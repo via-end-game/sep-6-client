@@ -6,7 +6,7 @@ export default NextAuth({
     session: async ({ session, token }) => {
       if (session?.user) {
         session.user.avatarUrl = token.avatarUrl;
-        session.user.fullName = token.fullName;
+        session.user.name = token.name;
         session.user.email = token.email;
         session.user.id = token.uid;
       }
@@ -16,7 +16,7 @@ export default NextAuth({
       if (user) {
         token.avatarUrl = user.avatarUrl;
         token.email = user.email;
-        token.fullName = user.username;
+        token.name = user.username;
         token.uid = user.userID;
       }
       return token;

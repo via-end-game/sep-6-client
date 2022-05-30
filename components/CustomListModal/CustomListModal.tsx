@@ -21,9 +21,14 @@ const CustomListModal: React.FC<Props> = ({ movieToList }) => {
         headers: { 'Content-Type': 'application/json' },
       });
 
-      if (response.ok) return setCustomLists(await response.json());
+      const data = await response.json();
 
-      return console.error('Error while trying to fetch custom lists');
+      if (response.ok) return setCustomLists(data);
+
+      return console.error(
+        'Error while trying to fetch custom lists -> ',
+        response
+      );
     };
 
     getCustomLists();

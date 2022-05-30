@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { getSession } from 'next-auth/react';
 
-const handler = async (req: NextApiRequest, res: NextApiResponse<void>) => {
+const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
   const session = await getSession({ req });
 
   if (session) {
@@ -15,9 +15,11 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<void>) => {
     if (response.ok) {
       return res.status(200).json(await response.json());
     }
+
+    return res.status(response.status).json({ response });
   }
 
-  return res.status(401).send();
+  return res.status(401).send({ error: 'Not authenticated' });
 };
 
 export default handler;

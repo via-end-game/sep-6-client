@@ -32,8 +32,10 @@ interface FavoriteListButtonProps {
   handler: () => void;
 }
 
-export const FavoriteListButton: React.FC<FavoriteListButtonProps> = () => (
-  <button className={styles.loadMoreButton}>
+export const FavoriteListButton: React.FC<FavoriteListButtonProps> = ({
+  handler,
+}) => (
+  <button className={styles.loadMoreButton} onClick={handler}>
     Add to favorite list
     <span className={`${styles.watchListPlus} ${styles.loadMoreButtonArrow}`}>
       <Image

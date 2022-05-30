@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import { CustomList } from '../../types/custom-list.dto';
 import { MovieToList } from '../../types/movie-to-list.dto';
-import { CustomListButton } from '../Button/Button';
+import { CustomListButton, ToCustomListButton } from '../Button/Button';
 import styles from './CustomListModal.module.css';
 
 interface Props {
@@ -52,7 +52,7 @@ const CustomListModal: React.FC<Props> = ({ movieToList }) => {
 
   return (
     <div>
-      <button onClick={openModal}>Open Modal</button>
+      <ToCustomListButton mediaType="movie" onClick={openModal} />
       <Modal
         className={styles.modal}
         overlayClassName={styles.modalOverlay}

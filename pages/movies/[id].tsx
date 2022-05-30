@@ -2,11 +2,9 @@ import type { NextPage } from 'next';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import {
-  FavoriteListButton,
-  ToCustomListButton,
-} from '../../components/Button/Button';
+import { FavoriteListButton } from '../../components/Button/Button';
 import CrewProfilePreviewList from '../../components/CrewProfilePreviewList';
+import CustomListModal from '../../components/CustomListModal';
 import MediaContentPreview from '../../components/MediaContentPreview';
 import MediaPageTrailer from '../../components/MediaPageTrailer';
 import { Heading1Text, Heading2Text } from '../../components/Text/Text';
@@ -147,7 +145,15 @@ const MoviePage: NextPage<Props> = ({
                 unoptimized={true}
               />
             </div>
-            <ToCustomListButton mediaType="movie" />
+            <CustomListModal
+              movieToList={{
+                genre: movie.genres[0].name,
+                posterPath: movie.poster_path,
+                rating: movie.vote_average,
+                title: movie.title,
+                tmdbID: movie.id,
+              }}
+            />
             <div className={styles.score}>
               <p className={styles.raiting}>
                 {String(movie.vote_average).replace('.', ',')}

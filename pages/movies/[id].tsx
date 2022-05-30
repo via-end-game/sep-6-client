@@ -1,4 +1,5 @@
 import type { NextPage } from 'next';
+import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import {
@@ -67,6 +68,7 @@ const MoviePage: NextPage<Props> = ({
     directors: Crew[];
     writers: Crew[];
   }>({ directors: [], writers: [] });
+  const { data: session } = useSession();
 
   useEffect(() => {
     console.log('Movie useEffect :: directors and writers trigger');
@@ -93,22 +95,20 @@ const MoviePage: NextPage<Props> = ({
     posterPath: string,
     rating: number,
     title: string,
-    tmdbID: number
+    tmdbId: number
   ) => {
-    const response = await fetch(
-      'https://europe-west3-sep6-351006.cloudfunctions.net/add_movie_to_user_list',
-      {
-        method: 'POST',
-        body: JSON.stringify({
-          genre,
-          posterPath,
-          rating,
-          title,
-          tmdbID,
-        }),
-        headers: { 'Content-Type': 'application/json' },
-      }
-    );
+    const response = await fetch('/api/add-favorite-movie', {
+      method: 'POST',
+      body: JSON.stringify({
+        genre,
+        posterPath,
+        rating,
+        title,
+        tmdbId,
+        userId: session?.user?.id,
+      }),
+      headers: { 'Content-Type': 'application/json' },
+    });
 
     if (response.ok) return console.log('Movie added to your favorite list');
 
@@ -256,17 +256,19 @@ const MoviePage: NextPage<Props> = ({
                   </p>
                 </div>
               </div>
-              <FavoriteListButton
-                handler={() =>
-                  handleAddToFavorites(
-                    movie.genres[0].name || 'default',
-                    movie.poster_path,
-                    movie.vote_average,
-                    movie.title,
-                    movie.id
-                  )
-                }
-              />
+              {session && (
+                <FavoriteListButton
+                  handler={() =>
+                    handleAddToFavorites(
+                      movie.genres[0].name || 'default',
+                      movie.poster_path,
+                      movie.vote_average,
+                      movie.title,
+                      movie.id
+                    )
+                  }
+                />
+              )}
             </div>
           </div>
         </div>

@@ -69,3 +69,17 @@ export const ToCustomListButton: React.FC<ToCustomListButtonProps> = ({
     Add {mediaType} to list
   </button>
 );
+
+interface CustomListButtonProps {
+  children: string;
+  handler: () => void;
+}
+
+export const CustomListButton: React.FC<CustomListButtonProps> = ({
+  children,
+  handler,
+}) => (
+  <button className={styles.customList} onClick={handler}>
+    {children}
+  </button>
+);

@@ -13,11 +13,6 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
       getCustomLists(session?.user?.id || 1),
     ]);
 
-    console.log(
-      `Fetched profile {id: ${session?.user?.id || 1}} response ->`,
-      responses[0]
-    );
-
     return {
       props: {
         customLists: responses[0],

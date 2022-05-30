@@ -51,12 +51,14 @@ export const FavoriteListButton: React.FC<FavoriteListButtonProps> = ({
 
 interface ToCustomListButtonProps {
   mediaType: 'movie' | 'show';
+  onClick: () => void;
 }
 
 export const ToCustomListButton: React.FC<ToCustomListButtonProps> = ({
   mediaType,
+  onClick,
 }) => (
-  <button className={styles.customList}>
+  <button className={styles.customList} onClick={onClick}>
     <div className={styles.customListIconContainer}>
       <Image
         alt=""
@@ -67,5 +69,19 @@ export const ToCustomListButton: React.FC<ToCustomListButtonProps> = ({
       />
     </div>
     Add {mediaType} to list
+  </button>
+);
+
+interface CustomListButtonProps {
+  children: string;
+  handler: () => void;
+}
+
+export const CustomListButton: React.FC<CustomListButtonProps> = ({
+  children,
+  handler,
+}) => (
+  <button className={styles.customList} onClick={handler}>
+    {children}
   </button>
 );

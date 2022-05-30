@@ -4,6 +4,8 @@ import { getSession } from 'next-auth/react';
 const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
   const session = await getSession({ req });
 
+  console.log('~~~ SESSION ~~~ -> ', session);
+
   if (session) {
     const response = await fetch(
       `${process.env.GCF_URL}/get_movies_by_userid?userId=${session.user?.id}`,
@@ -19,7 +21,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
     return res.status(response.status).json({ response });
   }
 
-  return res.status(401).send({ error: 'Not authenticated' });
+  return res.status(401).json({ error: 'Not authenticated' });
 };
 
 export default handler;

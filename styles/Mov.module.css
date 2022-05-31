@@ -1,0 +1,329 @@
+.overviewSection {
+  margin-bottom: 128px;
+}
+
+.backdrop {
+  height: 560px;
+  margin-inline: auto;
+  position: relative;
+  width: 1400px;
+}
+
+.backdropImageContainer {
+  height: 100%;
+  position: relative;
+  width: 100%;
+}
+
+.backdropImageContainer::after {
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%),
+    linear-gradient(90deg, #000000 0%, rgba(0, 0, 0, 0) 50%, #000000 100%);
+  content: '';
+  height: 100%;
+  position: absolute;
+  width: 100%;
+}
+
+.backdropPlayContainer {
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  display: inline-block;
+  font-size: 0;
+  left: 50%;
+  padding: 36px;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.backdropPlayContainer img {
+  opacity: 0.5;
+}
+
+.posterGroup {
+  margin-top: -80px;
+  width: 209px;
+}
+
+.posterImageContainer {
+  height: 312px;
+  margin-bottom: 24px;
+  position: relative;
+  width: 100%;
+}
+
+.score {
+  align-items: flex-end;
+  display: flex;
+  justify-content: space-between;
+  margin: 24px 0 2px;
+}
+
+.raiting {
+  font-family: 'Inter';
+  font-size: 32px;
+  font-weight: 500;
+}
+
+.raitingOf {
+  font-family: 'Inter';
+  font-size: 14px;
+  font-weight: 300;
+  opacity: 0.7;
+}
+
+.share {
+  align-items: center;
+  display: flex;
+  font-family: 'Syne';
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.shareIconContainer {
+  font-size: 0;
+  margin-right: 8px;
+}
+
+.raitingVotes {
+  font-family: 'Inter';
+  font-size: 10px;
+  font-weight: 400;
+  margin-bottom: 24px;
+  opacity: 0.6;
+}
+
+.rateText {
+  font-family: 'Syne';
+  font-size: 11px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  opacity: 0.5;
+}
+
+.rateStars {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.overviewContainer {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 80px;
+}
+
+.overview {
+  padding-top: 48px;
+}
+
+.overviewTitle {
+  margin-bottom: 40px;
+}
+
+.overviewOffsetContainer {
+  margin-left: 80px;
+}
+
+.overviewDescription {
+  font-family: 'Inter';
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 180%;
+  margin-bottom: 40px;
+  opacity: 0.9;
+}
+
+.feedbacks {
+  display: flex;
+  margin-bottom: 64px;
+}
+
+.feedback:not(:last-child) {
+  margin-right: 64px;
+}
+
+.feedbackTitle {
+  font-family: 'Syne';
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.feedbackValue {
+  font-family: 'Inter';
+  font-size: 12px;
+  font-weight: 300;
+  opacity: 0.7;
+}
+
+.castAndCrewSection {
+  margin-bottom: 196px;
+}
+
+.crewAndCastNames {
+  align-items: flex-end;
+  display: flex;
+  flex-direction: column;
+  margin: -24px 0 0 auto;
+  padding-right: 128px;
+  width: fit-content;
+}
+
+.topCasts {
+  display: flex;
+  margin-bottom: 56px;
+  width: fit-content;
+}
+
+.topCast:not(:last-child) {
+  margin-right: 64px;
+}
+
+.topCast {
+  align-items: end;
+  display: grid;
+  grid-template-rows: 1fr auto;
+}
+
+.topCastCharacter {
+  font-family: 'Inter';
+  font-size: 11px;
+  font-weight: 400;
+  margin-bottom: 8px;
+  opacity: 0.5;
+  white-space: pre-line;
+}
+
+.topCastName {
+  display: table-caption;
+  font-family: 'Syne';
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 114%;
+}
+
+.topCrews {
+  align-self: flex-start;
+  left: -128px;
+  position: relative;
+}
+
+.topCrew:not(:last-child) {
+  margin-bottom: 12px;
+}
+
+.topCrewJob {
+  font-family: 'Inter';
+  font-size: 12px;
+  font-weight: 500;
+  margin: 3px 48px 0 0;
+  opacity: 0.6;
+  position: absolute;
+  text-align: right;
+  width: 64px;
+}
+
+.topCrewName {
+  font-family: 'Syne';
+  font-size: 15px;
+  font-weight: 700;
+  padding-left: 128px;
+}
+
+.videosSection {
+  margin-bottom: 196px;
+}
+
+.videoSectionTitle {
+  margin-bottom: 96px;
+}
+
+.videosList {
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.videosList > div {
+  flex-shrink: 0;
+}
+
+.videosList > div:not(:last-child) {
+  margin-right: 96px;
+}
+
+.castSection {
+  margin-bottom: 196px;
+}
+
+.castSectionTitle {
+  margin-bottom: 64px;
+}
+
+.castSectionSubTitle {
+  font-family: 'Inter';
+  font-size: 10px;
+  font-weight: 500;
+  margin-top: 8px;
+  opacity: 0.5;
+}
+
+.castList {
+  margin: 96px 0 0 280px;
+}
+
+.boxOfficeSection {
+  margin-bottom: 196px;
+}
+
+.boxOfficeBudgets {
+  display: grid;
+  gap: 64px 96px;
+  grid-template-columns: auto 400px;
+  justify-content: end;
+  margin-top: -32px;
+}
+
+.boxOfficeBudgetTitle {
+  display: table-caption;
+  font-family: 'Syne';
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.boxOfficeBudgetValue {
+  border-top: 1px solid rgba(255, 255, 255, 0.25);
+  font-family: 'Inter';
+  font-size: 36px;
+  font-weight: 600;
+  padding-top: 8px;
+}
+
+.boxOfficeBudgetValueRevenue {
+  border-top: 1px solid rgba(255, 255, 255, 0.85);
+}
+
+.moreLikeThis {
+  margin-bottom: 196px;
+}
+
+.moreLikeThisTitle {
+  margin-bottom: 96px;
+}
+
+.mediaRecommandationList {
+  display: grid;
+  gap: 64px 14px;
+  grid-template-columns: repeat(4, 208px);
+}
+
+.mediaRecommandationList > a {
+  opacity: 1;
+}
+
+.mediaRecommandationList:hover a:not(:hover) {
+  opacity: 0.1;
+}

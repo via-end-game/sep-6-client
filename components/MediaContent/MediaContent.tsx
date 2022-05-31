@@ -33,6 +33,7 @@ const MediaContent: React.FC<Props> = (props) => {
           alt={`${props.title} cover`}
           height={469}
           src={getResourcePath(props.backdropPath)}
+          unoptimized={true}
           width={1300}
         />
       </div>
@@ -43,6 +44,7 @@ const MediaContent: React.FC<Props> = (props) => {
               alt={props.title}
               height={390}
               src={getResourcePath(props.posterPath)}
+              unoptimized={true}
               width={260}
             />
           </div>
@@ -60,6 +62,7 @@ const MediaContent: React.FC<Props> = (props) => {
                     alt=""
                     height={13}
                     src="/assets/icons/share.svg"
+                    unoptimized={true}
                     width={13}
                   />
                 </span>
@@ -79,6 +82,7 @@ const MediaContent: React.FC<Props> = (props) => {
                     alt=""
                     height={16}
                     src="/assets/icons/star.svg"
+                    unoptimized={true}
                     width={16}
                   />
                 </div>
@@ -105,6 +109,7 @@ const MediaContent: React.FC<Props> = (props) => {
                     alt=""
                     height={40}
                     src="/assets/icons/rank-up.svg"
+                    unoptimized={true}
                     width={40}
                   />
                   <div>
@@ -123,18 +128,6 @@ const MediaContent: React.FC<Props> = (props) => {
             </div>
           </div>
           <div className={styles.movieCredits}>
-            <h2 className={styles.movieCreditsHeader}>
-              Director{props.directors.length > 1 && 's'}
-            </h2>
-            <CrewProfilePreviewList list={props.directors} />
-          </div>
-          <div className={styles.movieCredits}>
-            <h2 className={styles.movieCreditsHeader}>
-              Writer{props.writers.length > 1 && 's'}
-            </h2>
-            <CrewProfilePreviewList list={props.writers} />
-          </div>
-          <div className={styles.movieCredits}>
             <h2 className={styles.movieCreditsHeader}>Cast</h2>
             <CrewProfilePreviewList list={props.cast.slice(0, 20)} />
           </div>
@@ -149,6 +142,7 @@ const MediaContent: React.FC<Props> = (props) => {
               alt={mediaContent.title}
               height={240}
               src={`https://image.tmdb.org/t/p/original${mediaContent.poster_path}`}
+              unoptimized={true}
               width={240}
             />
             <h3>{mediaContent.title}</h3>

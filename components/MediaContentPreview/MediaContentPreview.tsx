@@ -24,6 +24,7 @@ const MediaContentPreview: React.FC<Props> = ({
             alt={`${title} poster`}
             height={308}
             src={posterPath}
+            unoptimized={true}
             width={208}
           />
           {showTitle && (

@@ -1,8 +1,8 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import nextConnect from 'next-connect';
 import { Storage } from '@google-cloud/storage';
+import { NextApiRequest, NextApiResponse } from 'next';
 
-export default nextConnect().get(async (req: any, res: any) => {
+const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
   let projectId = process.env.PROJECT_ID;
   let keyFilename = process.env.GOOGLE_APPLICATION_CREDENTIALS; // Get this from Google Cloud -> Credentials -> Service Accounts
   const storage = new Storage({
@@ -23,4 +23,6 @@ export default nextConnect().get(async (req: any, res: any) => {
   } catch (error) {
     res.send('Error:' + error);
   }
-});
+};
+
+export default handler;

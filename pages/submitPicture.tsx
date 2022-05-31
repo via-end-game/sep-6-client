@@ -13,7 +13,7 @@ const getSecrets = async (event: any) => {
 const submit = async (event: any) => {
   event.preventDefault();
   const response = await (
-    await fetch('/api/getImages', {
+    await fetch('/api/get-avatars', {
       method: 'GET',
     })
   ).json();

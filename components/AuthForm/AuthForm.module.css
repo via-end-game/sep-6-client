@@ -18,10 +18,20 @@
 }
 
 .imagePlacholder {
-  background-color: #191919;
   border-radius: 50%;
   height: 40px;
+  overflow: hidden;
   width: 40px;
+}
+
+.imagePlacholder > img {
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.imagePlacholderActive {
+  outline: 5px solid #ffffff;
 }
 
 .input {

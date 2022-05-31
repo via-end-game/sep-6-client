@@ -1,5 +1,6 @@
 import { Button } from '../Button/Button';
 import styles from './AuthForm.module.css';
+import { useEffect, useState } from 'react';
 
 interface FormElements extends HTMLFormControlsCollection {
   emailInput: HTMLInputElement;
@@ -12,6 +13,22 @@ interface AuthFormElement extends HTMLFormElement {
 }
 
 const SignUpForm: React.FC = () => {
+  const [selectedImageUrl, setSelectedImageUrl] = useState<string>('');
+  const [images, setImages] = useState<string[]>([]);
+
+  useEffect(() => {
+    const fetchImages = async () => {
+      const response = await fetch('/api/get-avatars', { method: 'GET' });
+
+      const data = await response.json();
+
+      setImages(data);
+      setSelectedImageUrl(data[0]);
+    };
+
+    fetchImages();
+  }, []);
+
   const handleSubmit = async (event: React.FormEvent<AuthFormElement>) => {
     event.preventDefault();
 
@@ -19,7 +36,7 @@ const SignUpForm: React.FC = () => {
       event.currentTarget.elements;
 
     await onSignUpSubmit(
-      '/default',
+      selectedImageUrl.split('/').reverse()[0],
       emailInput.value,
       nameInput.value,
       passwordInput.value
@@ -63,12 +80,18 @@ const SignUpForm: React.FC = () => {
           Pick a profile picture
         </label>
         <div className={styles.imagesContainer}>
-          <div className={styles.imagePlacholder}></div>
-          <div className={styles.imagePlacholder}></div>
-          <div className={styles.imagePlacholder}></div>
-          <div className={styles.imagePlacholder}></div>
-          <div className={styles.imagePlacholder}></div>
-          <div className={styles.imagePlacholder}></div>
+          {images.map((el) => (
+            <div
+              className={`${styles.imagePlacholder} ${
+                el === selectedImageUrl && styles.imagePlacholderActive
+              }`}
+              key={el}
+              onClick={() => setSelectedImageUrl(el)}
+            >
+              <img src={el} />
+              {el}
+            </div>
+          ))}
         </div>
       </div>
       <div className={styles.inputContainer}>

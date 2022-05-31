@@ -3,7 +3,7 @@ import { Storage } from '@google-cloud/storage';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
-  let projectId = process.env.PROJECT_ID;
+  let projectId = process.env.GOOGLE_PROJECT_ID;
   let keyFilename = process.env.GOOGLE_APPLICATION_CREDENTIALS; // Get this from Google Cloud -> Credentials -> Service Accounts
   const storage = new Storage({
     projectId,

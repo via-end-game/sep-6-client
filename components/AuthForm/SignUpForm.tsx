@@ -18,7 +18,7 @@ const SignUpForm: React.FC = () => {
 
   useEffect(() => {
     const fetchImages = async () => {
-      const response = await fetch('/api/getImages', { method: 'GET' });
+      const response = await fetch('/api/get-avatars', { method: 'GET' });
 
       const data = await response.json();
 

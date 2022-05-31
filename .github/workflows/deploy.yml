@@ -1,4 +1,4 @@
-name: deploy prod build to vercel
+name: deploy production build to vercel
 
 on:
   pull_request:

@@ -14,18 +14,21 @@ const CrewProfilePreview: React.FC<Props> = ({
 }) => (
   <div className={styles.container}>
     <div className={styles.profilePicture}>
-      {picturePath && (
+      {picturePath ? (
         <Image
           alt={`${name} profile`}
-          height={72}
+          height={68}
           src={picturePath}
-          width={72}
+          unoptimized={true}
+          width={68}
         />
+      ) : (
+        <div className={styles.profileFallback}></div>
       )}
     </div>
     <div>
       <h3 className={styles.name}>{name}</h3>
-      {role && <p className={styles.role}>{role}</p>}
+      {role && <p className={styles.role}>{role || 'Unkown'}</p>}
     </div>
   </div>
 );

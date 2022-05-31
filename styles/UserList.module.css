@@ -1,0 +1,19 @@
+.userContainer {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  padding-top: 196px;
+}
+
+.title {
+  font-family: 'Syne';
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.movies {
+  display: grid;
+  gap: 64px 14px;
+  grid-template-columns: repeat(4, 208px);
+  padding: 96px 0;
+}

@@ -1,0 +1,87 @@
+.header {
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 9;
+}
+
+.header::before {
+  backdrop-filter: blur(40px);
+  content: '';
+  height: 100%;
+  left: 0;
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  transition: opacity 450ms ease-in-out;
+  width: 100%;
+}
+
+.header:hover::before {
+  opacity: 1;
+}
+
+.headerContainer {
+  align-items: center;
+  display: flex;
+  height: 64px;
+  justify-content: space-between;
+}
+
+.headerContainer > div {
+  align-items: center;
+  display: flex;
+}
+
+.headerLogoContainer {
+  z-index: 9;
+}
+
+.headerLogo {
+  display: table-caption;
+  font-family: 'Inter';
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.01em;
+  line-height: 10px;
+  margin-right: 32px;
+  text-transform: uppercase;
+}
+
+.separator {
+  background-color: #ffffff;
+  height: 24px;
+  margin-right: 32px;
+  opacity: 0.25;
+  width: 1px;
+}
+
+.searchContainer {
+  align-items: center;
+  display: flex;
+}
+
+.searchIcon {
+  margin-right: 8px;
+}
+
+.navigationItem {
+  font-family: 'Syne';
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 13px;
+  opacity: 0.5;
+  padding: 4px 8px;
+  transition: opacity 350ms ease-out;
+  z-index: 99;
+}
+
+.navigationItem:hover {
+  opacity: 1;
+}
+
+.navigationItem:not(:last-child) {
+  margin-right: 16px;
+}

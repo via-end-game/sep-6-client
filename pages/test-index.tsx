@@ -1,7 +1,6 @@
 import { NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
-import styles from './test-index.module.css';
 import { ListOfMedia } from '../types/list-of-media.dto';
 
 export const getServerSideProps = async () => {
@@ -38,7 +37,7 @@ const TestHome: NextPage<Props> = ({
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.container}>
+      <main>
         <h1>Popular Movies</h1>
         {trendingMovies.results.map((movie) => (
           <div key={movie.id}>
@@ -46,6 +45,7 @@ const TestHome: NextPage<Props> = ({
               alt={movie.title}
               height={240}
               src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+              unoptimized={true}
               width={240}
             />
             <h1>{movie.title}</h1>
@@ -62,6 +62,7 @@ const TestHome: NextPage<Props> = ({
               alt={tv.title}
               height={240}
               src={`https://image.tmdb.org/t/p/original${tv.poster_path}`}
+              unoptimized={true}
               width={240}
             />
             <h1>{tv.title}</h1>
@@ -79,6 +80,7 @@ const TestHome: NextPage<Props> = ({
               alt={popularMovie.title}
               height={240}
               src={`https://image.tmdb.org/t/p/original${popularMovie.poster_path}`}
+              unoptimized={true}
               width={240}
             />
             <h1>{popularMovie.title}</h1>

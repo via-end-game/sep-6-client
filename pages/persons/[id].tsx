@@ -1,9 +1,20 @@
-import { Person } from '../../types/person.dto';
 import { NextPage } from 'next';
-import { getResourcePath } from '../../utils/tmdbResources';
 import Image from 'next/image';
-import styles from '../../styles/Actor.module.css';
+import { useState } from 'react';
+import { LoadMoreButton } from '../../components/Button/Button';
+import Filmography from '../../components/Filmography';
+import MediaContentPreview from '../../components/MediaContentPreview';
+import { Heading1Text, Heading2Text } from '../../components/Text/Text';
+import styles from '../../styles/Persons.module.css';
 import { MovieCreditsBasedOnActor } from '../../types/movie-credits-based-on-actor';
+import { Person } from '../../types/person.dto';
+import { splitArrayToChunks } from '../../utils/arrays';
+import { getAge, getExplicitDate } from '../../utils/date';
+import {
+  getSortMediaByRating as getMediaSortedByRating,
+  getSortMediaByYear as getMediaSortedByYear,
+} from '../../utils/mediaContent';
+import { getResourcePath } from '../../utils/tmdbResources';
 
 export const getServerSideProps = async ({
   params: { id },
@@ -28,82 +39,136 @@ interface Props {
 }
 
 const ActorPage: NextPage<Props> = ({ actor, movieCredits }) => {
+  const [mediaSortedByRating] = useState(
+    splitArrayToChunks(
+      getMediaSortedByRating(movieCredits.cast).splice(0, 9),
+      3
+    )
+  );
+  const [mediaSortedByYear] = useState(getMediaSortedByYear(movieCredits.cast));
+
   return (
-    <main className={styles.mainContainer}>
-      <div>
-        <Image
-          className={styles.imageWrapper}
-          alt={`${actor.name} cover`}
-          height={430}
-          src={getResourcePath(actor.profile_path)}
-          width={360}
-        />
-        <div>
-          <h1>Personal Info</h1>
-        </div>
-
-        <div>
-          <h2>Known for</h2>
-          <ul>
-            <li>{actor.known_for_department}</li>
-          </ul>
-        </div>
-        <div>
-          <h2>Gender</h2>
-          {actor.id == 1 ? <p>Female</p> : <p>Male</p>}
-        </div>
-        <div>
-          <h2>Birthday: </h2>
-          <p>{actor.birthday}</p>
-        </div>
-        <div>
-          <h2>Place of Birth:</h2>
-          <p>{actor.place_of_birth}</p>
-        </div>
-        <div>
-          <h2>Also Known as </h2>
-          <p>{actor.also_known_as}</p>
-        </div>
-        {actor.also_known_as.map((name) => (
-          <div key={name}>{name}</div>
-        ))}
-      </div>
-
-      <div>
-        <h1>{`${actor.name}`}</h1>
-        <h3>Biography</h3>
-        <p>{`${actor.biography}`}</p>
-        <div>
-          <ul>
-            {movieCredits.cast.map((movie) => (
-              <div key={movie.id} className={styles.scrollmenu}>
-                <Image
-                  className={styles.imageWrapper}
-                  alt={`${movie.title} title`}
-                  height={430}
-                  src={getResourcePath(movie.poster_path ?? '')}
-                  width={360}
-                />
-                <p>
-                  {movie.title} and {movie.popularity}
-                </p>
+    <>
+      <main className={styles.personPage}>
+        <section className={styles.profile} id="profile">
+          <Image
+            alt={`${actor} profile`}
+            height={525}
+            objectFit="cover"
+            src={getResourcePath(actor.profile_path)}
+            unoptimized={true}
+            width={415}
+          />
+          <div className={styles.profileDetails}>
+            <div className={styles.profileName}>
+              <Heading1Text>{actor.name}</Heading1Text>
+            </div>
+            <p className={styles.profileActivity}>
+              Acting / Production / Writing / Creator
+            </p>
+          </div>
+        </section>
+        <section
+          className={`${styles.biography} page-container`}
+          id="biography"
+        >
+          <Heading2Text>Biography</Heading2Text>
+          <p className={styles.biographyDescription}>{actor.biography}</p>
+          <div className={styles.biographyReadMoreButton}>
+            <LoadMoreButton text="read" />
+          </div>
+        </section>
+        <section
+          className={`${styles.personalInformation} page-container`}
+          id="personal-information"
+        >
+          <Heading2Text>Personal {'\n'}Information</Heading2Text>
+          <div className={styles.personalInformationBar}>
+            <div className={styles.personalInformationBarElement}>
+              <p className={styles.personalInformationTitle}>Place of Birth</p>
+              <p className={styles.personalInformationValue}>
+                {actor.place_of_birth}
+              </p>
+            </div>
+            <div className={styles.personalInformationBarElement}>
+              <p className={styles.personalInformationTitle}>About</p>
+              <p className={styles.personalInformationValue}>
+                {`${actor.known_for_department}, \n${
+                  actor.id === 1 ? 'Female' : 'Male'
+                }`}
+              </p>
+            </div>
+            <div className={styles.personalInformationBarElement}>
+              <p className={styles.personalInformationTitle}>Birthday</p>
+              <p className={styles.personalInformationValue}>
+                {`${getExplicitDate(actor.birthday)}, \n${getAge(
+                  actor.birthday
+                )} years old`}
+              </p>
+            </div>
+          </div>
+        </section>
+        <section className={`${styles.knownFor} page-container`} id="known-for">
+          <div className={styles.knownForHeading}>
+            <Heading2Text>Known {'\n'}For</Heading2Text>
+          </div>
+          <div className={styles.knownForMediaList}>
+            {mediaSortedByRating.map((mediaContents, i) => (
+              <div key={mediaContents.reduce((s, e) => `${s}${e}`, `${i}`)}>
+                {mediaContents.map(({ id, poster_path, title }) => (
+                  <MediaContentPreview
+                    key={id}
+                    link={`/movies/${id}`}
+                    posterPath={getResourcePath(poster_path || '')}
+                    title={title}
+                  />
+                ))}
               </div>
             ))}
-          </ul>
-        </div>
-        <div>
-          <ul>
-            {movieCredits.cast.map((movie) => (
-              <li key={movie.id}>
-                <p>
-                  `${movie.release_date}\t${movie.title}`
-                </p>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-    </main>
+          </div>
+        </section>
+        <section
+          className={`${styles.filmography} page-container`}
+          id="filmography"
+        >
+          <div className={styles.filmographyHeader}>
+            <Heading2Text>Filmography</Heading2Text>
+          </div>
+          <div className={styles.filmographyInformation}>
+            <div className={styles.filmographyDepartaments}>
+              <button
+                className={`${styles.filmographyDepartament} ${styles.filmographyDepartamentSelected}`}
+              >
+                Acting
+                <span className={styles.filmographyDepartamentAmount}>
+                  - {movieCredits.cast.length}
+                </span>
+              </button>
+              <p className={styles.filmographyDepartament}>Production</p>
+              <p className={styles.filmographyDepartament}>Writing</p>
+              <p className={styles.filmographyDepartament}>Creator</p>
+            </div>
+            <div className={styles.filmographyList}>
+              {mediaSortedByYear.map(
+                ({ character, id, release_date, title }) => (
+                  <Filmography
+                    character={character}
+                    id={id}
+                    key={id}
+                    title={title}
+                    year={
+                      release_date
+                        ? parseInt(release_date.split('-')[0])
+                        : 'Unknown'
+                    }
+                  />
+                )
+              )}
+            </div>
+          </div>
+        </section>
+      </main>
+    </>
   );
 };
 

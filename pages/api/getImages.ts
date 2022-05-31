@@ -15,9 +15,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
     const [files] = await bucket.getFiles();
     let linkArray = [];
     for (let y = 0; y < files.length; y++) {
-      linkArray.push(
-        `https://storage.cloud.google.com/${process.env.BUCKET}/${files[y].id}`
-      );
+      linkArray.push(`${process.env.BUCKET}/${files[y].id}`);
     }
     res.send(linkArray);
   } catch (error) {

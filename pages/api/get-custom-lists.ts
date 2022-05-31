@@ -4,8 +4,6 @@ import { getSession } from 'next-auth/react';
 const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
   const session = await getSession({ req });
 
-  console.log('~~~ SESSION ~~~ -> ', session);
-
   if (session) {
     const response = await fetch(
       `${process.env.GCF_URL}/get_movies_by_userid?userId=${session.user?.id}`,

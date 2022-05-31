@@ -35,14 +35,34 @@ const CustomListModal: React.FC<Props> = ({ movieToList }) => {
   }, []);
 
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log('Trying to update the list with id -> ', e.target.value);
-    const response = await fetch('/api/add-movie-to-list', {
-      body: JSON.stringify({ ...movieToList, userListID: e.target.value }),
-      headers: { 'Content-Type': 'application/json' },
-      method: 'POST',
-    });
+    console.log(
+      `Clicked on a ${e.target.checked ? 'checked' : 'unchecked'} property`
+    );
 
-    if (response.ok) return setCustomLists(await response.json());
+    if (e.target.checked) {
+      console.log('Trying to add a movie to the list');
+
+      const response = await fetch('/api/add-movie-to-list', {
+        body: JSON.stringify({ ...movieToList, userListID: e.target.value }),
+        headers: { 'Content-Type': 'application/json' },
+        method: 'POST',
+      });
+
+      if (response.ok) return setCustomLists(await response.json());
+    } else {
+      console.log('Trying to remove a movie from the list');
+
+      const response = await fetch('/api/remove-movie-from-list', {
+        body: JSON.stringify({
+          movieId: movieToList.tmdbID,
+          userListId: e.target.value,
+        }),
+        headers: { 'Content-Type': 'application/json' },
+        method: 'POST',
+      });
+
+      if (response.ok) return setCustomLists(await response.json());
+    }
 
     return console.error('Error while trying to fetch custom lists');
   };

@@ -5,18 +5,20 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<void>) => {
   const session = await getSession({ req });
 
   if (session) {
-    const { genre, posterPath, rating, title, tmdbID, userListID } = req.body;
+    const { movieId, userListId } = req.body;
+
+    console.log('Trying to remove movie ->', {
+      movieId,
+      userListId: parseInt(userListId),
+      userId: session.user?.id,
+    });
 
     const response = await fetch(
-      `${process.env.GCF_URL}/add_movie_to_user_list`,
+      `${process.env.GCF_URL}/remove_movie_from_user_list`,
       {
         body: JSON.stringify({
-          genre,
-          posterPath,
-          rating,
-          title,
-          tmdbID,
-          userListID,
+          movieId,
+          userListId: parseInt(userListId),
           userId: session.user?.id,
         }),
         headers: { 'Content-Type': 'application/json' },

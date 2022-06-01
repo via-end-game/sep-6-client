@@ -59,6 +59,10 @@
   color: rgba(255, 255, 255, 0.35);
 }
 
+.input:invalid{
+  background-color: orangered;
+}
+
 .inputLabel {
   background-color: #000000;
   color: rgba(255, 255, 255, 0.5);

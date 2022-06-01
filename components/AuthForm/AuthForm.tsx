@@ -2,6 +2,7 @@ import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { Button } from '../Button/Button';
 import styles from './AuthForm.module.css';
+import { useState } from 'react';
 
 interface FormElements extends HTMLFormControlsCollection {
   emailInput: HTMLInputElement;
@@ -13,6 +14,7 @@ interface AuthFormElement extends HTMLFormElement {
 }
 
 const AuthForm: React.FC = () => {
+  const [hasAuthError, setAuthError] = useState(false);
   const router = useRouter();
 
   const handleSubmit = async (event: React.FormEvent<AuthFormElement>) => {
@@ -20,7 +22,11 @@ const AuthForm: React.FC = () => {
 
     const { emailInput, passwordInput } = event.currentTarget.elements;
 
-    await onSignInSubmit(emailInput.value, passwordInput.value);
+    const signInSubmit = await onSignInSubmit(
+      emailInput.value,
+      passwordInput.value
+    );
+    console.log('Signing is ' + signInSubmit);
   };
 
   const onSignInSubmit = async (email: string, password: string) => {
@@ -37,23 +43,11 @@ const AuthForm: React.FC = () => {
 
     console.log('SignInResult ->', signInResult);
 
-    if (signInResult && !signInResult['error']) router.replace('/profile');
+    // @ts-ignore
+    if (signInResult && signInResult.ok) return router.replace('/profile');
 
-    // const response = await fetch('/api/auth/log-in', {
-    //   body: JSON.stringify({ email, password }),
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   method: 'POST',
-    // });
-
-    // const data = await response.json();
-
-    // if (!response.ok) {
-    //   console.error(data.error || 'Something went wrong!');
-    // }
-
-    // return data;
+    // @ts-ignore
+    setAuthError(!signInResult.ok);
   };
 
   return (
@@ -65,7 +59,8 @@ const AuthForm: React.FC = () => {
           name="email"
           placeholder="Email"
           spellCheck="false"
-          type="text"
+          type="email"
+          required
         />
         <label className={styles.inputLabel} htmlFor="email">
           Email
@@ -79,6 +74,8 @@ const AuthForm: React.FC = () => {
           placeholder="Password"
           spellCheck="false"
           type="password"
+          pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$"
+          required
         />
         <label className={styles.inputLabel} htmlFor="password">
           Password
@@ -87,6 +84,7 @@ const AuthForm: React.FC = () => {
       <div className={styles.formButton}>
         <Button>Sign in</Button>
       </div>
+      <div>{hasAuthError && 'Wrong credentials'}</div>
     </form>
   );
 };

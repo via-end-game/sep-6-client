@@ -35,10 +35,12 @@ export default NextAuth({
             method: 'POST',
           });
 
-          const data = await response.json();
-          console.log('Response from the /login end-point ->', data);
+          if (response.ok) {
+            const data = await response.json();
+            console.log('Response from the /login end-point ->', data);
 
-          if (response.ok) return data;
+            return data;
+          }
 
           return null;
         } catch (error) {

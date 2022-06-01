@@ -72,7 +72,6 @@ const SignUpForm: React.FC = () => {
 
     return data;
   };
-
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
       <div className={styles.formProfilePictureContainer}>
@@ -102,6 +101,8 @@ const SignUpForm: React.FC = () => {
           placeholder="Name"
           spellCheck="false"
           type="text"
+          pattern="^[a-z\d\.]{5,}$"
+          required
         />
         <label className={styles.inputLabel} htmlFor="name">
           Name
@@ -114,7 +115,8 @@ const SignUpForm: React.FC = () => {
           name="email"
           placeholder="Email"
           spellCheck="false"
-          type="text"
+          type="email"
+          required
         />
         <label className={styles.inputLabel} htmlFor="email">
           Email
@@ -128,6 +130,8 @@ const SignUpForm: React.FC = () => {
           placeholder="Password"
           spellCheck="false"
           type="password"
+          pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$"
+          required
         />
         <label className={styles.inputLabel} htmlFor="password">
           Password

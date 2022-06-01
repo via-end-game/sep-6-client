@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { FavoriteListButton } from '../../components/Button/Button';
 import CrewProfilePreviewList from '../../components/CrewProfilePreviewList';
 import CustomListModal from '../../components/CustomListModal';
+import MediaContentBackdrop from '../../components/MediaContentBackdrop';
 import MediaContentPreview from '../../components/MediaContentPreview';
 import MediaPageTrailer from '../../components/MediaPageTrailer';
 import { Heading1Text, Heading2Text } from '../../components/Text/Text';
@@ -13,7 +14,7 @@ import { ListOfMedia } from '../../types/list-of-media.dto';
 import { Crew, MovieCredits } from '../../types/movie-credits.dto';
 import { MovieReleaseDates } from '../../types/movie-release-dates.dto';
 import { MovieReviews } from '../../types/movie-reviews.dto';
-import { MovieVideos } from '../../types/movie-videos.dto';
+import { MovieVideos, Result } from '../../types/movie-videos.dto';
 import { Movie } from '../../types/movie.dto';
 import { getNumberWithCommas, getNumberWithSpaces } from '../../utils/numbers';
 import { getMovieVideos } from '../../utils/requests';
@@ -118,21 +119,11 @@ const MoviePage: NextPage<Props> = ({
   return (
     <main>
       <section className={styles.overviewSection} id="overview">
-        <div className={styles.backdrop}>
-          <div className={styles.backdropImageContainer}>
-            <Image
-              alt={`${movie.title} backdrop`}
-              layout="fill"
-              objectFit="cover"
-              priority={true}
-              src={getResourcePath(movie.backdrop_path)}
-              unoptimized={true}
-            />
-          </div>
-          <div className={styles.backdropPlayContainer}>
-            <Image alt="" height={16} src="/assets/icons/play.svg" width={16} />
-          </div>
-        </div>
+        <MediaContentBackdrop
+          backdropPath={movie.backdrop_path}
+          title={movie.title}
+          videoId={getBackdropTrailerId(movieVideos.results)}
+        />
         <div className={`${styles.overviewContainer} page-container`}>
           <div className={styles.posterGroup}>
             <div className={styles.posterImageContainer}>
@@ -331,9 +322,10 @@ const MoviePage: NextPage<Props> = ({
             .filter(
               ({ type }) => type === 'Trailer' || type === 'Behind the Scenes'
             )
-            .map(({ id, key, name }) => (
-              <MediaPageTrailer id={key} key={id} title={name} />
-            ))}
+            .map(({ id, key, name }) => {
+              console.log('Mapping video with id of -> ', id);
+              return <MediaPageTrailer id={key} key={id} title={name} />;
+            })}
         </div>
       </section>
       <section className={styles.castSection} id="cast">
@@ -419,5 +411,12 @@ const getSimilarMovies = (id: string): Promise<ListOfMedia> =>
   fetch(
     `https://api.themoviedb.org/3/movie/${id}/similar?api_key=${process.env.TMDB_API_KEY}`
   ).then((res) => res.json());
+
+const getBackdropTrailerId = (movies: Result[]) => {
+  const id = movies.filter(({ type }) => type === 'Trailer')[0].key;
+  console.log('Trailer id -> ', id);
+
+  return id;
+};
 
 export default MoviePage;

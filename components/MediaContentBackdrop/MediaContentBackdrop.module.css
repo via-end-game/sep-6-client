@@ -1,0 +1,60 @@
+.backdrop {
+  height: 560px;
+  margin-inline: auto;
+  position: relative;
+  width: 1400px;
+}
+
+.backdropImageContainer {
+  height: 100%;
+  position: relative;
+  width: 100%;
+}
+
+.backdropImageContainer::after {
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%),
+    linear-gradient(90deg, #000000 0%, rgba(0, 0, 0, 0) 50%, #000000 100%);
+  content: '';
+  height: 100%;
+  pointer-events: none;
+  position: absolute;
+  width: 100%;
+}
+
+.backdropImageContainerWithVideo:hover + .backdropPlayContainer,
+.backdropPlayContainer:hover {
+  opacity: 1;
+}
+
+.backdropPlayContainer {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 0;
+  left: 50%;
+  opacity: 0.6;
+  padding: 36px;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transition: opacity 400ms ease-in-out;
+}
+
+.modal {
+  background-color: #191919;
+  display: flex;
+  flex-direction: column;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.modalOverlay {
+  background-color: rgba(0, 0, 0, 0.75);
+  inset: 0;
+  position: fixed;
+  z-index: 99999;
+}

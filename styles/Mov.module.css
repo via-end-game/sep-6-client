@@ -2,44 +2,6 @@
   margin-bottom: 128px;
 }
 
-.backdrop {
-  height: 560px;
-  margin-inline: auto;
-  position: relative;
-  width: 1400px;
-}
-
-.backdropImageContainer {
-  height: 100%;
-  position: relative;
-  width: 100%;
-}
-
-.backdropImageContainer::after {
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%),
-    linear-gradient(90deg, #000000 0%, rgba(0, 0, 0, 0) 50%, #000000 100%);
-  content: '';
-  height: 100%;
-  position: absolute;
-  width: 100%;
-}
-
-.backdropPlayContainer {
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 50%;
-  display: inline-block;
-  font-size: 0;
-  left: 50%;
-  padding: 36px;
-  position: absolute;
-  top: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.backdropPlayContainer img {
-  opacity: 0.5;
-}
-
 .posterGroup {
   margin-top: -80px;
   width: 209px;
